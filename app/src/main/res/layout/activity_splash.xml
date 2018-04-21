@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fsociety2.dyslexiafriendlybuddy.Splash"
+    android:orientation="vertical"
+    android:background="@drawable/outer_space"
+    android:theme="@style/SplashTheme"
+    >
+    <LinearLayout
+        android:id="@+id/top1"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical">
+        <TextView
+            android:textColor="@color/colorLightOrange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dyslexia Friendly Buddy"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:textColor="@color/colorLightDarkOrange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Developed By
+FSOCIETY 2.0 "
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/alexa_logo"
+        >
+
+
+    </LinearLayout>
+
+</LinearLayout>
