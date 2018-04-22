@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Dyslexia Friendly Buddy</string>
+    <string name="app_name">ALEXZA</string>
+    <string name="login_activity_name">Dyslexia Friendly Buddy</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
