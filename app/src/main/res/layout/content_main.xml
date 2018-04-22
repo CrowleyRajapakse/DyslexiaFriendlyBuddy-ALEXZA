@@ -21,6 +21,7 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="exitUntilCollapsed|scroll"
             app:contentScrim="?android:attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
             app:title="Dyslexia Friendly Buddy"
 
             app:expandedTitleMarginStart="20dp"
