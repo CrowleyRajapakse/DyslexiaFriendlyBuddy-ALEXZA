@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.fsociety2.dyslexiafriendlybuddy.Splash"
     android:orientation="vertical"
-    android:background="@drawable/outer_space"
+    android:background="@drawable/splash_background1"
     android:theme="@style/SplashTheme"
     >
     <LinearLayout
@@ -15,7 +15,7 @@
         android:layout_height="300dp"
         android:orientation="vertical">
         <TextView
-            android:textColor="@color/colorLightOrange"
+            android:textColor="@color/colorBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dyslexia Friendly Buddy"
@@ -24,7 +24,7 @@
             android:textSize="30sp"
             android:textStyle="bold"/>
         <TextView
-            android:textColor="@color/colorLightDarkOrange"
+            android:textColor="@color/black_overlay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -41,7 +41,7 @@ FSOCIETY 2.0 "
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/alexa_logo"
+        android:background="@drawable/alexa_logo_black"
         >
 
 
