@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,8 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+    private CardView cameraCard, voiceCard, dictionaryCard, chunkCard, settingsCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +30,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(),ContactUs.class);
+                startActivity(intent);
             }
         });
 
@@ -41,6 +43,18 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        cameraCard = (CardView) findViewById(R.id.cameracardId);
+        voiceCard = (CardView) findViewById(R.id.voicecardid);
+        dictionaryCard = (CardView) findViewById(R.id.dictionarycardid);
+        chunkCard = (CardView) findViewById(R.id.chunkcardid);
+        settingsCard = (CardView) findViewById(R.id.settingscardid);
+
+        cameraCard.setOnClickListener(this);
+        voiceCard.setOnClickListener(this);
+        dictionaryCard.setOnClickListener(this);
+        chunkCard.setOnClickListener(this);
+        settingsCard.setOnClickListener(this);
     }
 
     @Override
@@ -110,10 +124,29 @@ public class MainActivity extends AppCompatActivity
             startActivity(Intent.createChooser(shareIntent,"Sending"));
 
         } else if (id == R.id.nav_chunk) {
-        }
+
+        } else if (id == R.id.nav_contact_us) {
+            Intent intent = new Intent(this,ContactUs.class);
+            startActivity(intent);        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        Intent i;
+
+        switch (view.getId()){
+            case R.id.cameracardId : i = new Intent(this,OCRActivity.class);
+                startActivity(i);
+                break;
+            case R.id.settingscardid : i = new Intent(this,SettingsActivity.class);
+                startActivity(i) ;
+                break;
+            default:break;
+        }
     }
 }
