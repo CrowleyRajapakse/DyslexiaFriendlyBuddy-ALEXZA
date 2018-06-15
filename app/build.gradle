@@ -29,7 +29,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-
     //Add Libraries
 
     implementation 'com.google.android.gms:play-services-vision:11.8.0'

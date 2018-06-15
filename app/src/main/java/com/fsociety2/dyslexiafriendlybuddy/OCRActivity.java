@@ -1,8 +1,11 @@
 package com.fsociety2.dyslexiafriendlybuddy;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.TextView;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -51,6 +55,7 @@ public class OCRActivity extends AppCompatActivity {
         cameraView = findViewById(R.id.surface_view);
         textView = findViewById(R.id.text_view);
 
+
         TextRecognizer textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
         if(! textRecognizer.isOperational()){
             Log.w("MainActivity","Detector dependencies are not yet available");
@@ -58,7 +63,7 @@ public class OCRActivity extends AppCompatActivity {
             cameraSource = new CameraSource.Builder(getApplicationContext(),textRecognizer)
                     .setFacing(CameraSource.CAMERA_FACING_BACK)
                     .setRequestedPreviewSize(1280,1024)
-                    .setRequestedFps(2.0f)
+                    .setRequestedFps(30.0f)
                     .setAutoFocusEnabled(true)
                     .build();
 
@@ -117,5 +122,15 @@ public class OCRActivity extends AppCompatActivity {
             });
 
         }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabSend);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),MainServiceActivity.class);
+                intent.putExtra("data",textView.getText());
+                startActivity(intent);
+            }
+        });
     }
 }

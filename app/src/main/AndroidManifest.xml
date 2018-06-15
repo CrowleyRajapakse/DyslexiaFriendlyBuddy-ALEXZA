@@ -13,7 +13,7 @@
 
     <application
         android:allowBackup="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
@@ -51,10 +51,10 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".ContactUs"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+        <activity
+            android:name=".ContactUs"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".MainServiceActivity"></activity>
     </application>
 
 </manifest>
