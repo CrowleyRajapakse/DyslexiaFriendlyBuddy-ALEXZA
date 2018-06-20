@@ -55,6 +55,7 @@
             android:name=".ContactUs"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".MainServiceActivity"></activity>
+        <activity android:name=".MLActivity"></activity>
     </application>
 
 </manifest>
