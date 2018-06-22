@@ -103,4 +103,24 @@
     <string name="contact_form_post_message">Please wait! We\'re sending your message to the marketing department...</string>
     <string name="contact_posted">Your message has been successfully delivered.</string>
 
+    <!-- string related to TTS settings-->
+    <string name="pitchRate">Pitch</string>
+    <string name="speedRate">Speed</string>
+    <string name="volume">Volume</string>
+
+    <!-- string related to chunking and dictionary -->
+    <string name="chunk">Chunk</string>
+    <string name="word_count">Word Count</string>
+    <string name="font_settings">Font Settings</string>
+    <string name="font_size">Font Size</string>
+    <string name="font_style">Font Style</string>
+    <string name="font_prompt">Font Prompt</string>
+    <string name="font_color">Font Color</string>
+    <string name="picker_1">Font Color Picker</string>
+    <string name="background_color">Background Color</string>
+    <string name="picker_2">Background Color Picker</string>
+    <string name="save">Save</string>
+    <string name="next_chunk">Next Chunk</string>
+    <string name="text">No Text</string>
+
 </resources>

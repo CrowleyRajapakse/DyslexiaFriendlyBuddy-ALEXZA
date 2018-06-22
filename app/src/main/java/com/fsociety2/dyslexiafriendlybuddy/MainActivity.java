@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private CardView cameraCard, voiceCard, dictionaryCard, chunkCard, settingsCard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),ContactUs.class);
+                Intent intent = new Intent(getApplicationContext(), ContactUs.class);
                 startActivity(intent);
             }
         });
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(this,SettingsActivity.class);
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
             return true;
         }
@@ -98,14 +99,18 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent intent = new Intent(this,OCRActivity.class);
+            Intent intent = new Intent(this, OCRActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_voice) {
+            Intent intent = new Intent(this, TTS_SettingsActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_dictionary) {
+            Intent intent = new Intent(this, ChunkingActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
-            Intent intent = new Intent(this,SettingsActivity.class);
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_share) {
@@ -114,20 +119,23 @@ public class MainActivity extends AppCompatActivity
             sendIntent.putExtra(Intent.EXTRA_TEXT,
                     "Hey check out this app 'Dyslexia Friendly Buddy', soon will be available at play store");
             sendIntent.setType("text/plain");
-            startActivity(Intent.createChooser(sendIntent,"Sharing"));
+            startActivity(Intent.createChooser(sendIntent, "Sharing"));
 
         } else if (id == R.id.nav_send) {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);
             shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             shareIntent.setType("text/plain");
             shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Hey, download this awesome app!");
-            startActivity(Intent.createChooser(shareIntent,"Sending"));
+            startActivity(Intent.createChooser(shareIntent, "Sending"));
 
         } else if (id == R.id.nav_chunk) {
+            Intent intent = new Intent(this, ChunkingActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_contact_us) {
-            Intent intent = new Intent(this,ContactUs.class);
-            startActivity(intent);        }
+            Intent intent = new Intent(this, ContactUs.class);
+            startActivity(intent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -139,14 +147,29 @@ public class MainActivity extends AppCompatActivity
 
         Intent i;
 
-        switch (view.getId()){
-            case R.id.cameracardId : i = new Intent(this,OCRActivity.class);
+        switch (view.getId()) {
+            case R.id.cameracardId:
+                i = new Intent(this, OCRActivity.class);
                 startActivity(i);
                 break;
-            case R.id.settingscardid : i = new Intent(this,SettingsActivity.class);
-                startActivity(i) ;
+            case R.id.settingscardid:
+                i = new Intent(this, SettingsActivity.class);
+                startActivity(i);
                 break;
-            default:break;
+            case R.id.voicecardid:
+                i = new Intent(this, TTS_SettingsActivity.class);
+                startActivity(i);
+                break;
+            case R.id.chunkcardid:
+                i = new Intent(this, ChunkingActivity.class);
+                startActivity(i);
+                break;
+            case R.id.dictionarycardid:
+                i = new Intent(this, DictionaryActivity.class);
+                startActivity(i);
+                break;
+            default:
+                break;
         }
     }
 }

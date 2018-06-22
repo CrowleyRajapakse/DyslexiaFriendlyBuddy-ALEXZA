@@ -53,8 +53,16 @@
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".ContactUs"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".MainServiceActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".MainServiceActivity" />
+
+        <activity android:name=".TTS_SettingsActivity" />
+
+        <activity android:name=".DictionaryActivity" />
+
+        <activity android:name=".ChunkingActivity" />
+
     </application>
 
 </manifest>
