@@ -63,6 +63,7 @@
 
         <activity android:name=".ChunkingActivity" />
 
+        <activity android:name=".MLActivity" />
     </application>
 
 </manifest>

@@ -16,6 +16,12 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+import android.view.View;
+import android.widget.Button;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +48,10 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private Button btnNextPage;
     private Button button2;
 
+    private Button mlButton;
+
     SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +59,12 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_service);
 
+
         dataView = findViewById(R.id.textData);
         btnNextPage = findViewById(R.id.nextchunk);
         listen = findViewById(R.id.btn_play);
         button2 = findViewById(R.id.tochunkinterface);
+        mlButton = (Button) findViewById(R.id.mlBtn);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainServiceActivity.this.getApplicationContext());
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
@@ -76,6 +87,14 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             }
         });
 
+        mlButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainServiceActivity.this, MLActivity.class);
+                intent.putExtra("data", dataView.getText());
+                startActivity(intent);
+            }
+        });
 
         btnNextPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,5 +244,6 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             currentPage = 0;
             dataView.setText(pages[currentPage]);
         }
+
     }
 }
