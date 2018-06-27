@@ -10,9 +10,12 @@ import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.Toolbar;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,6 +36,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private TextToSpeech textToSpeech;
     private float pitch;
     private float speed;
+    private ImageView stop;
 
     final String TAG = "LOGCATCHUNK";
     int textSize;
@@ -45,8 +49,8 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     String pages[];
     String words[];
     String textFromCam;
-    private Button btnNextPage;
-    private Button button2;
+    private ImageView btnNextPage;
+    private ImageView button2;
 
     private Button mlButton;
 
@@ -59,12 +63,15 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_service);
 
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
 
         dataView = findViewById(R.id.textData);
         btnNextPage = findViewById(R.id.nextchunk);
         listen = findViewById(R.id.btn_play);
+        stop = findViewById(R.id.btn_stop);
         button2 = findViewById(R.id.tochunkinterface);
-        mlButton = (Button) findViewById(R.id.mlBtn);
+        //mlButton = (Button) findViewById(R.id.mlBtn);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainServiceActivity.this.getApplicationContext());
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
@@ -87,14 +94,14 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             }
         });
 
-        mlButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainServiceActivity.this, MLActivity.class);
-                intent.putExtra("data", dataView.getText());
-                startActivity(intent);
-            }
-        });
+//        mlButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainServiceActivity.this, MLActivity.class);
+//                intent.putExtra("data", dataView.getText());
+//                startActivity(intent);
+//            }
+//        });
 
         btnNextPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,12 +121,38 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
                 textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (textToSpeech != null){
+                    textToSpeech.stop();
+                }
+            }
+        });
         //check the presence of the TTS resources
         Intent intent = new Intent();
         intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(intent, 1);
 
     }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.main_service,menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id==R.id.action_voice){
+//            Intent intent = new Intent(this,TTS_SettingsActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -213,6 +246,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             startActivityForResult(intent, 1);
         }
     }
+
 
     private void chunckText() {
         if (wordCount > 0) {

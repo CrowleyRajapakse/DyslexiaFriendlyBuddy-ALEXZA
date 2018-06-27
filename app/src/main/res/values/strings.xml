@@ -103,6 +103,10 @@
     <string name="contact_form_post_message">Please wait! We\'re sending your message to the marketing department...</string>
     <string name="contact_posted">Your message has been successfully delivered.</string>
 
+    <string name="action_voice">Voice Settings</string>
+    <string name="action_chunk">Chunk Settings</string>
+    <string name="action_dictionary">Dictionary Support</string>
+
     <!-- string related to TTS settings-->
     <string name="pitchRate">Pitch</string>
     <string name="speedRate">Speed</string>
@@ -122,5 +126,6 @@
     <string name="save">Save</string>
     <string name="next_chunk">Next Chunk</string>
     <string name="text">No Text</string>
+
 
 </resources>

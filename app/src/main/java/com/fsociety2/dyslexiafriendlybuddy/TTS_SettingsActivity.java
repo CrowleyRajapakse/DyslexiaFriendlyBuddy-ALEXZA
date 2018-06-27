@@ -19,6 +19,8 @@ public class TTS_SettingsActivity extends AppCompatActivity {
     private TextView textViewVolume;
     private SeekBar seekBarPitch;
     private SeekBar seekBarSpeed;
+    private float pitch;
+    private float speed;
     private SeekBar seekBarVolume;
     private AudioManager audioManager;
 
@@ -38,10 +40,10 @@ public class TTS_SettingsActivity extends AppCompatActivity {
 
         seekBarPitch = (SeekBar) findViewById(R.id.seekBar_pitch);
         seekBarSpeed = (SeekBar) findViewById(R.id.seekBar_speed);
-        seekBarVolume = (SeekBar) findViewById(R.id.seekBar_volume);
+        //seekBarVolume = (SeekBar) findViewById(R.id.seekBar_volume);
         textViewPitch = (TextView) findViewById(R.id.pitch_textView);
         textViewSpeed = (TextView) findViewById(R.id.speed_textView);
-        textViewVolume = (TextView) findViewById(R.id.volume_textView);
+        // textViewVolume = (TextView) findViewById(R.id.volume_textView);
 
         seekBarPitch.setOnSeekBarChangeListener(pitchSeekBarListener);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(TTS_SettingsActivity.this.getApplicationContext());
@@ -116,8 +118,18 @@ public class TTS_SettingsActivity extends AppCompatActivity {
 //        }
 //    };
 
+//
+//    @Override
+//    protected void onPause() {
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putFloat(EXTRA_PITCH_RATE, pitch);
+//        editor.putFloat(EXTRA_SPEED_RATE, speed);
+//        editor.apply();
+//        super.onPause();
+//    }
+
     private void updatePitch(float value) {
-        float pitch = value / 50;
+        pitch = value / 50;
         if (pitch < 0.1) pitch = 0.1f;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat(EXTRA_PITCH_RATE, pitch);
@@ -125,7 +137,7 @@ public class TTS_SettingsActivity extends AppCompatActivity {
     }
 
     private void updateSpeed(float value) {
-        float speed = value / 50;
+        speed = value / 50;
         if (speed < 0.1) speed = 0.1f;
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat(EXTRA_SPEED_RATE, speed);
