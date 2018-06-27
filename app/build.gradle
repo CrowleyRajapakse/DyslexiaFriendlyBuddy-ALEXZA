@@ -32,6 +32,4 @@ dependencies {
     //Add Libraries
 
     implementation 'com.google.android.gms:play-services-vision:11.8.0'
-    implementation 'me.himanshusoni.chatmessageview:chat-message-view:1.0.3'
-    implementation files('libs/Ab.jar')
 }

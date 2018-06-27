@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:allowBackup="true"
@@ -55,12 +54,16 @@
         <activity
             android:name=".ContactUs"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".MainServiceActivity" />
+
         <activity android:name=".TTS_SettingsActivity" />
+
         <activity android:name=".DictionaryActivity" />
+
         <activity android:name=".ChunkingActivity" />
+
         <activity android:name=".MLActivity" />
-        <activity android:name=".ChatBotActivity"></activity>
     </application>
 
 </manifest>
