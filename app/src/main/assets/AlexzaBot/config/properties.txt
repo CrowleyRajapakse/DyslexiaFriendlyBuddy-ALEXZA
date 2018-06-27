@@ -1,0 +1,8 @@
+url:http://djustice-android.tumblr.com
+name:Alexza
+email:alexza@fsociety.com
+gender:female
+botmaster:Sampath Rajapakse
+organization:Fsociety 2.0
+version:0.0.1
+
