@@ -27,4 +27,13 @@
 </interval>
 days until Christmas.</template>
 </category>
+<category><pattern>HOW MANY DAYS UNTIL SINHALA NEW YEAR</pattern>
+<template><interval>
+<jformat>MMMMMMMMM dd</jformat>
+<style>days</style>
+<from><date jformat="MMMMMMMMM dd"/></from>
+<to>April 14</to>
+</interval>
+days until Sinhala New Year.</template>
+</category>
 </aiml>

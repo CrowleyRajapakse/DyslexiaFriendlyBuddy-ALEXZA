@@ -14,7 +14,7 @@
 </category>
 <category><pattern>PIC</pattern>
 <template>I have this picture.
-<img src="https://s3.amazonaws.com/it14104640awsbucket/ALEXZA.png"/></template>
+    <img width="250px" src="https://s3.amazonaws.com/it14104640awsbucket/ALEXZA.png"><br/></img></template>
 </category>
 <category><pattern>EMOTIONS</pattern>
 <template><random>

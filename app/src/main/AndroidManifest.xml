@@ -60,7 +60,8 @@
         <activity android:name=".DictionaryActivity" />
         <activity android:name=".ChunkingActivity" />
         <activity android:name=".MLActivity" />
-        <activity android:name=".ChatBotActivity"></activity>
+        <activity android:name=".ChatBotActivity" />
+        <activity android:name=".OcrOpenCV"></activity>
     </application>
 
 </manifest>

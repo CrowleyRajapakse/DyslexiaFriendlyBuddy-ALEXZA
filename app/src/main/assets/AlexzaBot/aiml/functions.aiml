@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <category><pattern>HOW CAN I LISTEN *</pattern>
+        <template> You can listen to captured text by
+            1.)Capture the text.
+            2.)Click the send button.
+            3.)Now you can click play button to listen to the captured text.
+        </template>
+    </category>
+    <category><pattern>HOW CAN I CHANGE VOICE SETTING *</pattern>
+        <template> You can change the voice settings by
+            1.)Go to Navigation or Home View
+            2.)Click the Voice icon.
+            3.)Now you can edit the voice presets.
+        </template>
+    </category>
+
+</aiml>
