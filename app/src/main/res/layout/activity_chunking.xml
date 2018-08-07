@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,22 +20,25 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="47dp">
 
                 <TextView
                     android:id="@+id/textView2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/word_count" />
 
-                <android.support.design.widget.TextInputEditText
+
+
+                <EditText
                     android:id="@+id/wordcountinput"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:ems="10"
                     android:inputType="number"
-                    android:text="Count" />
+               />
 
 
             </LinearLayout>
@@ -55,14 +59,12 @@
 
             <SeekBar
                 android:id="@+id/chunkseekBar"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:max="100"
-                android:progress="20"
-                android:progressDrawable="@android:color/white" />
+                android:progress="20" />
 
             <TextView
                 android:id="@+id/text5"
@@ -90,14 +92,15 @@
                     android:layout_weight="1"
                     android:text="@string/font_color" />
 
-
-                <Button
-                    android:id="@+id/pickerbutton"
+                <Spinner
+                    android:id="@+id/fontcolorspinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_weight="1"
-                    android:text="@string/picker_1" />
+                    android:prompt="@string/color" />
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -112,52 +115,36 @@
                     android:layout_weight="1"
                     android:text="@string/background_color" />
 
-                <Button
-                    android:id="@+id/pickerbutton2"
+                <Spinner
+                    android:id="@+id/backcolorspinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_weight="1"
-                    android:text="@string/picker_2" />
+                    android:prompt="@string/back_color" />
             </LinearLayout>
 
-            <Button
+            <ImageView
                 android:id="@+id/savebutton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
                 android:layout_weight="1"
-                android:text="@string/save" />
+                android:background="@drawable/circlebackgroundyellow"
+                android:contentDescription="@string/todo"
+                android:padding="10dp"
+                android:src="@drawable/ic_save_black_24dp" />
 
+<Button
+    android:id="@+id/colorbutton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:text="change color"
 
+    />
 
-            <!--   <NumberPicker
-                android:id="@+id/numberPicker1"
-                android:layout_width="54dp"
-                android:layout_height="29dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="212dp"
-                android:layout_marginEnd="59dp"
-                android:layout_marginTop="76dp"
-                app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/text1"
-                app:layout_constraintTop_toTopOf="parent" />
-
-           <NumberPicker
-                android:id="@+id/numberPicker2"
-                android:layout_width="55dp"
-                android:layout_height="32dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="177dp"
-                android:layout_marginEnd="59dp"
-                android:layout_marginTop="108dp"
-                app:layout_constraintBottom_toTopOf="@+id/radioGroup"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" /> -->
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

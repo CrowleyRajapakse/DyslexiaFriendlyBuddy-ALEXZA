@@ -120,12 +120,26 @@
     <string name="font_style">Font Style</string>
     <string name="font_prompt">Font Prompt</string>
     <string name="font_color">Font Color</string>
+    <string name="color">Color</string>
     <string name="picker_1">Font Color Picker</string>
+    <string name="back_color">Back Color</string>
+    <string name="todo">To Do</string>
     <string name="background_color">Background Color</string>
     <string name="picker_2">Background Color Picker</string>
     <string name="save">Save</string>
     <string name="next_chunk">Next Chunk</string>
     <string name="text">No Text</string>
+    <string name="textview">TextView</string>
+    <string name="enter_the_word">Enter the word</string>
+    <string name="button">Button</string>
+    <string name="chunking">Chunking</string>
+    <string name="dictionary">My Dictionary</string>
+    <string name="count">count</string>
+    <string name="definition">Definition:</string>
+    <string name="phonotic_notation">Phonotic Notation:</string>
+    <string name="colorpicker_dialog_title">Choose the color</string>
+    <string name="colorpicker_dialog_cancel">CANCEL</string>
+    <string name="colorpicker_dialog_ok">OK</string>
 
 
 </resources>

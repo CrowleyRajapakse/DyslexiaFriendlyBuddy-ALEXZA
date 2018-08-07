@@ -1,5 +1,6 @@
 package com.fsociety2.dyslexiafriendlybuddy;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -19,14 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import android.view.View;
-import android.widget.Button;
-
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.util.Locale;
 
@@ -42,6 +38,8 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     int textSize;
     int wordCount;
     String fontstyle;
+    String fontcolor;
+    String backcolor;
     private TextView dataView;
 
     int currentPage;
@@ -52,6 +50,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private ImageView btnNextPage;
     private ImageView button2;
 
+    private Activity activity;
     private Button mlButton;
 
     SharedPreferences sharedPreferences;
@@ -63,15 +62,12 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_service);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
         dataView = findViewById(R.id.textData);
         btnNextPage = findViewById(R.id.nextchunk);
         listen = findViewById(R.id.btn_play);
         stop = findViewById(R.id.btn_stop);
         button2 = findViewById(R.id.tochunkinterface);
-        //mlButton = (Button) findViewById(R.id.mlBtn);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainServiceActivity.this.getApplicationContext());
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
@@ -85,7 +81,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
         String[] dataArr = textFromCam.split(" ");
 
-
+        ImageView button2 = findViewById(R.id.tochunkinterface);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,14 +90,6 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             }
         });
 
-//        mlButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainServiceActivity.this, MLActivity.class);
-//                intent.putExtra("data", dataView.getText());
-//                startActivity(intent);
-//            }
-//        });
 
         btnNextPage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +97,12 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
                 if (currentPage < pageCount - 1) {
                     currentPage++;
                     dataView.setText(pages[currentPage]);
+                } else {
+                    String text = "Reading Finished!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
+                    toast.show();
+
                 }
             }
         });
@@ -125,7 +119,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (textToSpeech != null){
+                if (textToSpeech != null) {
                     textToSpeech.stop();
                 }
             }
@@ -136,23 +130,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         startActivityForResult(intent, 1);
 
     }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.main_service,menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if (id==R.id.action_voice){
-//            Intent intent = new Intent(this,TTS_SettingsActivity.class);
-//            startActivity(intent);
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -202,9 +180,12 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
         wordCount = sharedPreferences.getInt(ChunkingActivity.EXTRA_WORD_COUNT, 0);
         fontstyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "default");
+        fontcolor = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_COLOR, "Green");
+        backcolor = sharedPreferences.getString(ChunkingActivity.EXTRA_BACK_COLOR, "Grey");
         Log.d(TAG, "style : " + fontstyle);
 
         switch (fontstyle) {
+
             case "Sans Serif":
                 dataView.setTypeface(Typeface.SANS_SERIF);
                 break;
@@ -214,16 +195,83 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             case "Monospace":
                 dataView.setTypeface(Typeface.MONOSPACE);
                 break;
-            case "Default font":
-                dataView.setTypeface(Typeface.DEFAULT_BOLD);
+            case "Aller":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Aller_Rg.ttf"));
+                break;
+            case "Arial":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/arial.ttf"));
+                break;
+            case "Arimo":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Arimo.ttf"));
+                break;
+            case "Caviar Dreams":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/CaviarDreams.ttf"));
+                break;
+            case "Lato":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Lato.ttf"));
+                break;
+            case "Ostrich":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ostrich.ttf"));
+                break;
+            case "Oswald":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Oswald.ttf"));
+                break;
+            case "Playfair":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/PlayfairDisplay.otf"));
+                break;
+            case "Roboto":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Roboto.ttf"));
+                break;
+            case "Titillium":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Titillium.otf"));
+                break;
+            case "Walkway":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Walkway.ttf"));
                 break;
             default:
                 break;
         }
+
+
+        switch (fontcolor) {
+            case "Blue":
+                dataView.setTextColor((Color.rgb(82, 96, 168)));
+                break;
+            case "Green":
+                dataView.setTextColor((Color.rgb(31, 186, 71)));
+                break;
+            case "Red":
+                dataView.setTextColor((Color.rgb(255, 0, 0)));
+                break;
+            case "Black":
+                dataView.setTextColor((Color.rgb(0, 0, 0)));
+                break;
+            default:
+                break;
+        }
+
+        switch (backcolor) {
+            case "Yellow":
+                dataView.setBackgroundColor((Color.rgb(250, 252, 103)));
+                break;
+            case "Light Blue":
+                dataView.setBackgroundColor((Color.rgb(170, 249, 225)));
+                break;
+            case "Salmon Pink":
+                dataView.setBackgroundColor((Color.rgb(255, 160, 122)));
+                break;
+            case "Grey":
+                dataView.setBackgroundColor((Color.rgb(192, 192, 192)));
+                break;
+            default:
+                break;
+        }
+
+
         Log.d(TAG, "WOrd count : " + wordCount);
         dataView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        dataView.setTextColor((Color.rgb(0, 87, 48)));
-        dataView.setBackgroundColor((Color.rgb(192, 192, 192)));
+        // dataView.setTextColor((Color.rgb(0, 87, 48)));
+        // dataView.setBackgroundColor((Color.rgb(192, 192, 192)));
 
         if (wordCount > 0) {
             chunckText();
