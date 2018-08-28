@@ -24,7 +24,7 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
     Context context;
 
     TextView textView3;
- //   TextView textView6;
+ // TextView textView6;
 
     private String phon;
 
@@ -89,23 +89,35 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
             JSONObject d = sensesArray.getJSONObject(0);
             JSONArray de = d.getJSONArray("definitions");
 
+           // JSONObject jsonObject2 = e.getJSONObject(0);
+           // JSONArray pronounceArray = jsonObject2.getJSONArray("pronunciations");
 
-          //  JSONObject pEntries = results.getJSONObject(0);
-          //  JSONArray pArray = pEntries.getJSONArray("pronunciations");
+          //  JSONObject p = pronounceArray.getJSONObject(0);
+
+
+
+
+         //   JSONObject pEntries = results.getJSONObject(0);
+         //   JSONArray pArray = pEntries.getJSONArray("pronunciations");
+         //   JSONObject p = pArray.getJSONObject(0);
+         //   JSONArray phonNot = p.getJSONArray("phoneticNotation");
+         //   JSONArray phonSpell = p.getJSONArray("phoneticSpelling");
 
            // JSONObject pnEntries = laArray.getJSONObject(0);
            // JSONArray phonic = pnEntries.getJSONArray("phoneticNotation");
 
             def = de.getString(0);
-          //  phon = phonic.getString(0);
+          //  phon = phonNot.getString(0);
 
             textView3.setText(def);
+           // textView6.setText(phon);
 
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
 
     }

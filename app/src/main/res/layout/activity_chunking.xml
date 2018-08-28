@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="30dp"
+    android:layout_margin="20dp"
     android:orientation="vertical"
     tools:context=".ChunkingActivity">
 
@@ -16,6 +15,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:orientation="vertical">
 
             <LinearLayout
@@ -92,13 +93,14 @@
                     android:layout_weight="1"
                     android:text="@string/font_color" />
 
-                <Spinner
-                    android:id="@+id/fontcolorspinner"
-                    android:layout_width="match_parent"
+                <Button
+                    android:id="@+id/fontcolorbutton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:layout_weight="1"
-                    android:prompt="@string/color" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Font color"
+                    />
 
 
             </LinearLayout>
@@ -109,19 +111,22 @@
 
                 <TextView
                     android:id="@+id/text7"
-                    android:layout_width="match_parent"
+                    android:layout_width="180dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:layout_weight="1"
-                    android:text="@string/background_color" />
+                    android:text="@string/background_color"
 
-                <Spinner
-                    android:id="@+id/backcolorspinner"
-                    android:layout_width="match_parent"
+                    />
+
+                <Button
+                    android:id="@+id/colorbutton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:layout_weight="1"
-                    android:prompt="@string/back_color" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="Back color"
+                    />
             </LinearLayout>
 
             <ImageView
@@ -136,14 +141,7 @@
                 android:padding="10dp"
                 android:src="@drawable/ic_save_black_24dp" />
 
-<Button
-    android:id="@+id/colorbutton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:text="change color"
 
-    />
 
         </LinearLayout>
     </ScrollView>

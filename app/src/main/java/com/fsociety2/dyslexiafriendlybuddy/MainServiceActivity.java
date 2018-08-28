@@ -35,11 +35,12 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private ImageView stop;
 
     final String TAG = "LOGCATCHUNK";
-    int textSize;
-    int wordCount;
-    String fontstyle;
-    String fontcolor;
-    String backcolor;
+    private int textSize;
+    private int wordCount;
+    private int fontcolor;
+    private int backcolor;
+    private String fontstyle;
+
     private TextView dataView;
 
     int currentPage;
@@ -75,7 +76,17 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         //dataView.setText(getIntent().getExtras().getString("data"));
         textFromCam = getIntent().getExtras().getString("data");
         dataView.setText(textFromCam);
+     //   dataView.setOnLongClickListener(new View.OnLongClickListener() {
 
+      //      @Override
+         //   public boolean onLongClick(View v) {
+            //    String text = "Reading Finished!";
+             //   int duration = Toast.LENGTH_SHORT;
+            //    Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
+             //   toast.show();
+             //   return false;
+           // }
+       // });
         Log.d("LOGCATCHUNK", "Text : " + dataView.getText());
         dataView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
@@ -180,8 +191,9 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
         wordCount = sharedPreferences.getInt(ChunkingActivity.EXTRA_WORD_COUNT, 0);
         fontstyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "default");
-        fontcolor = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_COLOR, "Green");
-        backcolor = sharedPreferences.getString(ChunkingActivity.EXTRA_BACK_COLOR, "Grey");
+        fontcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_COLOR, 0xFF0000);
+        backcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_BACK_COLOR, 0xFFFF00);
+
         Log.d(TAG, "style : " + fontstyle);
 
         switch (fontstyle) {
@@ -229,49 +241,16 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Walkway.ttf"));
                 break;
             default:
+                dataView.setTypeface(Typeface.DEFAULT);
                 break;
         }
+        dataView.setTextColor(fontcolor);
+        dataView.setBackgroundColor(backcolor);
 
 
-        switch (fontcolor) {
-            case "Blue":
-                dataView.setTextColor((Color.rgb(82, 96, 168)));
-                break;
-            case "Green":
-                dataView.setTextColor((Color.rgb(31, 186, 71)));
-                break;
-            case "Red":
-                dataView.setTextColor((Color.rgb(255, 0, 0)));
-                break;
-            case "Black":
-                dataView.setTextColor((Color.rgb(0, 0, 0)));
-                break;
-            default:
-                break;
-        }
-
-        switch (backcolor) {
-            case "Yellow":
-                dataView.setBackgroundColor((Color.rgb(250, 252, 103)));
-                break;
-            case "Light Blue":
-                dataView.setBackgroundColor((Color.rgb(170, 249, 225)));
-                break;
-            case "Salmon Pink":
-                dataView.setBackgroundColor((Color.rgb(255, 160, 122)));
-                break;
-            case "Grey":
-                dataView.setBackgroundColor((Color.rgb(192, 192, 192)));
-                break;
-            default:
-                break;
-        }
-
-
-        Log.d(TAG, "WOrd count : " + wordCount);
+        Log.d(TAG, "Word count : " + wordCount);
         dataView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
-        // dataView.setTextColor((Color.rgb(0, 87, 48)));
-        // dataView.setBackgroundColor((Color.rgb(192, 192, 192)));
+
 
         if (wordCount > 0) {
             chunckText();

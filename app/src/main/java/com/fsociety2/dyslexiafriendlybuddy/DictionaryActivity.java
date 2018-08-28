@@ -11,11 +11,11 @@ import org.w3c.dom.Text;
 
 public class DictionaryActivity extends AppCompatActivity {
     String url;
-   String def;
-//   String phon;
+    String def;
+    String phon;
     EditText editText;
     TextView textView3;
-  //  TextView textView6;
+    TextView textView6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class DictionaryActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.editText);
         textView3 = findViewById(R.id.textView3);
-      //  textView6 = findViewById(R.id.textView6);
+        // textView6 = findViewById(R.id.textView6);
 
 
     }
@@ -37,7 +37,7 @@ public class DictionaryActivity extends AppCompatActivity {
         url = dictionaryEntries();
         myDictionaryRequest.execute(url);
         textView3.setText(def);
-     //  textView6.setText(phon);
+        // textView6.setText(phon);
 
     }
 

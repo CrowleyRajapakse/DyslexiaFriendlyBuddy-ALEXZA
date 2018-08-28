@@ -29,7 +29,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_weight="1"
-                android:text="@string/text" />
+                android:text="@string/text"
+                android:textIsSelectable="true"
+                android:focusable="true"
+                android:longClickable="true" />
 
         </LinearLayout>
     </ScrollView>
