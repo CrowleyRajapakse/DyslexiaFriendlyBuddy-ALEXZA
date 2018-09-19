@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -23,6 +25,7 @@ public class TTS_SettingsActivity extends AppCompatActivity {
     private float speed;
     private SeekBar seekBarVolume;
     private AudioManager audioManager;
+    private ImageView ttsBackButton;
 
     final static String EXTRA_PITCH_RATE = "pitch";
     final static String EXTRA_SPEED_RATE = "speed";
@@ -44,6 +47,7 @@ public class TTS_SettingsActivity extends AppCompatActivity {
         textViewPitch = (TextView) findViewById(R.id.pitch_textView);
         textViewSpeed = (TextView) findViewById(R.id.speed_textView);
         // textViewVolume = (TextView) findViewById(R.id.volume_textView);
+        ttsBackButton = findViewById(R.id.tts_backButton);
 
         seekBarPitch.setOnSeekBarChangeListener(pitchSeekBarListener);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(TTS_SettingsActivity.this.getApplicationContext());
@@ -55,6 +59,12 @@ public class TTS_SettingsActivity extends AppCompatActivity {
         Log.d(TAG, "speed rate: " + previousSpeed);
         seekBarSpeed.setProgress((int) previousSpeed);
 
+        ttsBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 //        seekBarVolume.setOnSeekBarChangeListener(volumeSeekBarListener);
 //        int previousVolume = sharedPreferences.getInt(TTS_SettingsActivity.EXTRA_VOLUME_RATE, 10);
 //        seekBarVolume.setProgress(previousVolume);
