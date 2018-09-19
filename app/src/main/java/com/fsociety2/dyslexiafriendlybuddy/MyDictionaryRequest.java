@@ -27,18 +27,22 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
     String myurl;
     String inflection;
     String def;
+    String example;
+    String phonetic;
 
     Context context;
     TextView textView3;
+    TextView exampleText;
+    TextView phoneticText;
 
 
     private String phon;
 
-    MyDictionaryRequest(Context context, TextView textView3,String inflection) {
+    MyDictionaryRequest(Context context, TextView textView3, TextView exampleText, TextView phoneticText) {
         this.context = context;
         this.textView3 = textView3;
-        this.inflection=inflection;
-
+        this.exampleText = exampleText;
+        this.phoneticText = phoneticText;
     }
 
 
@@ -90,13 +94,28 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
 
             JSONObject d = sensesArray.getJSONObject(0);
             JSONArray de = d.getJSONArray("definitions");
+
             def = de.getString(0);
-            //  phon = phonNot.getString(0);
-
             textView3.setText(def);
-            // textView6.setText(phon);
+
+            JSONObject exes = sensesArray.getJSONObject(0);
+            JSONArray examples = exes.getJSONArray("examples");
+
+            JSONObject xx = examples.getJSONObject(0);
+            example = xx.getString("text");
+            exampleText.setText(example);
+
+            JSONObject pronounciations = laArray.getJSONObject(0);
+            JSONArray pronounce = pronounciations.getJSONArray("pronunciations");
 
 
+            JSONObject pp = pronounce.getJSONObject(0);
+          //  phonetic = pp.getString("phoneticSpelling");
+            phonetic= pp.optString("phoneticSpelling");
+
+            phoneticText.setText(phonetic);
+            Log.d("DICTLOG", "PhoText : " + pp);
+            Log.d("DICTLOG", "PhoText : " + phonetic);
 
         } catch (JSONException e) {
             e.printStackTrace();

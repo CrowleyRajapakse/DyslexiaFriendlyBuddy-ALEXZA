@@ -269,7 +269,6 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             case "Resagnicto":
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Resagnicto.ttf"));
                 break;
-
             case "Sansumi":
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Sansumi.ttf"));
                 break;
