@@ -1,9 +1,12 @@
 package com.fsociety2.dyslexiafriendlybuddy;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.util.Arrays;
 import java.util.Locale;
 
 public class MainServiceActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
@@ -50,7 +54,8 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private ImageView button2;
 
     private Activity activity;
-    private Button mlButton;
+    private Button btnMl;
+
 
     SharedPreferences sharedPreferences;
 
@@ -67,6 +72,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         listen = findViewById(R.id.btn_play);
         stop = findViewById(R.id.btn_stop);
         button2 = findViewById(R.id.tochunkinterface);
+        btnMl = findViewById(R.id.btn_hw);
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainServiceActivity.this.getApplicationContext());
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
@@ -137,6 +143,30 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         Intent intent = new Intent();
         intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(intent, 1);
+
+        btnMl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!isInternetConnection()){
+                    String text = "No Internet Access!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
+                    toast.show();
+                }else{
+
+                    if(Arrays.asList(words).contains("Text")){
+                        String text = "hard word ditected";
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
+                        toast.show();
+                    }
+                    Log.d(TAG, "words length $$$$$$$$$$$$$ : " + words.length + words[1]);
+
+                }
+
+            }
+        });
 
     }
 
@@ -312,5 +342,19 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             dataView.setText(pages[currentPage]);
         }
 
+    }
+
+    /**
+     * check internect connection of the device
+     * @return
+     */
+    public boolean isInternetConnection(){
+
+        ConnectivityManager cm = (ConnectivityManager) MainServiceActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+
+        return isConnected;
     }
 }
