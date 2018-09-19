@@ -134,6 +134,7 @@
     <string name="button">Button</string>
     <string name="chunking">Chunking</string>
     <string name="dictionary">My Dictionary</string>
+    <string name="action_dictionary_label">Dictionary</string>
     <string name="count">count</string>
     <string name="definition">Definition:</string>
     <string name="phonotic_notation">Phonotic Notation:</string>

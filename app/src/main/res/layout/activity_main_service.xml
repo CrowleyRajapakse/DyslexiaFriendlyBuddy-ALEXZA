@@ -26,13 +26,14 @@
                 android:id="@+id/textData"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="@string/text"
-                android:textIsSelectable="true"
                 android:focusable="true"
-                android:longClickable="true" />
+                android:longClickable="true"
+                android:text="@string/text"
+                android:textIsSelectable="true" />
 
         </LinearLayout>
     </ScrollView>

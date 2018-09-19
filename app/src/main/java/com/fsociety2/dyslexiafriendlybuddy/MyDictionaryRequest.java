@@ -3,8 +3,11 @@ package com.fsociety2.dyslexiafriendlybuddy;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import net.reduls.sanmoku.dic.Char;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +15,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -21,17 +25,19 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
     final String app_id = "52b34dcb";
     final String app_key = "e5f510fa088c57d3cad7f1af28abe345";
     String myurl;
-    Context context;
+    String inflection;
+    String def;
 
+    Context context;
     TextView textView3;
- // TextView textView6;
+
 
     private String phon;
 
-    MyDictionaryRequest(Context context, TextView textView3) {
+    MyDictionaryRequest(Context context, TextView textView3,String inflection) {
         this.context = context;
         this.textView3 = textView3;
-        //this.textView6 = textView6;
+        this.inflection=inflection;
 
     }
 
@@ -49,8 +55,6 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
 
             // read the output from the server
             BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-
             StringBuilder stringBuilder = new StringBuilder();
 
             String line = null;
@@ -66,15 +70,13 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
         }
     }
 
-
     @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
-       // textView6.setText(s);
-        String def;
-        String phon;
+    protected void onPostExecute(String result) {
+        super.onPostExecute(result);
+
+
         try {
-            JSONObject js = new JSONObject(s);
+            JSONObject js = new JSONObject(result);
             JSONArray results = js.getJSONArray("results");
 
             JSONObject lEntries = results.getJSONObject(0);
@@ -88,37 +90,17 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
 
             JSONObject d = sensesArray.getJSONObject(0);
             JSONArray de = d.getJSONArray("definitions");
-
-           // JSONObject jsonObject2 = e.getJSONObject(0);
-           // JSONArray pronounceArray = jsonObject2.getJSONArray("pronunciations");
-
-          //  JSONObject p = pronounceArray.getJSONObject(0);
-
-
-
-
-         //   JSONObject pEntries = results.getJSONObject(0);
-         //   JSONArray pArray = pEntries.getJSONArray("pronunciations");
-         //   JSONObject p = pArray.getJSONObject(0);
-         //   JSONArray phonNot = p.getJSONArray("phoneticNotation");
-         //   JSONArray phonSpell = p.getJSONArray("phoneticSpelling");
-
-           // JSONObject pnEntries = laArray.getJSONObject(0);
-           // JSONArray phonic = pnEntries.getJSONArray("phoneticNotation");
-
             def = de.getString(0);
-          //  phon = phonNot.getString(0);
+            //  phon = phonNot.getString(0);
 
             textView3.setText(def);
-           // textView6.setText(phon);
+            // textView6.setText(phon);
 
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
 
     }
 }

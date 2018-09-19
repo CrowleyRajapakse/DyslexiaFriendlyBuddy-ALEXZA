@@ -3,20 +3,15 @@ package com.fsociety2.dyslexiafriendlybuddy;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
 import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.support.v7.widget.Toolbar;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,6 +28,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private float pitch;
     private float speed;
     private ImageView stop;
+    MotionEvent motionEvent;
 
     final String TAG = "LOGCATCHUNK";
     private int textSize;
@@ -40,11 +36,13 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private int fontcolor;
     private int backcolor;
     private String fontstyle;
+    String word;
 
     private TextView dataView;
 
     int currentPage;
     int pageCount;
+    int mOffset;
     String pages[];
     String words[];
     String textFromCam;
@@ -73,20 +71,20 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainServiceActivity.this.getApplicationContext());
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
 
-        //dataView.setText(getIntent().getExtras().getString("data"));
+
         textFromCam = getIntent().getExtras().getString("data");
         dataView.setText(textFromCam);
-     //   dataView.setOnLongClickListener(new View.OnLongClickListener() {
+        //   dataView.setOnLongClickListener(new View.OnLongClickListener() {
 
-      //      @Override
-         //   public boolean onLongClick(View v) {
-            //    String text = "Reading Finished!";
-             //   int duration = Toast.LENGTH_SHORT;
-            //    Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
-             //   toast.show();
-             //   return false;
-           // }
-       // });
+        //      @Override
+        //   public boolean onLongClick(View v) {
+        //    String text = "Reading Finished!";
+        //   int duration = Toast.LENGTH_SHORT;
+        //    Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
+        //   toast.show();
+        //   return false;
+        // }
+        // });
         Log.d("LOGCATCHUNK", "Text : " + dataView.getText());
         dataView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
@@ -190,7 +188,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         super.onResume();
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
         wordCount = sharedPreferences.getInt(ChunkingActivity.EXTRA_WORD_COUNT, 0);
-        fontstyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "default");
+        fontstyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "Aller");
         fontcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_COLOR, 0xFF0000);
         backcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_BACK_COLOR, 0xFFFF00);
 
@@ -198,50 +196,58 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
         switch (fontstyle) {
 
-            case "Sans Serif":
-                dataView.setTypeface(Typeface.SANS_SERIF);
-                break;
-            case "Serif":
-                dataView.setTypeface(Typeface.SERIF);
-                break;
-            case "Monospace":
-                dataView.setTypeface(Typeface.MONOSPACE);
-                break;
             case "Aller":
-                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Aller_Rg.ttf"));
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Aller.ttf"));
                 break;
-            case "Arial":
-                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/arial.ttf"));
-                break;
+
             case "Arimo":
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Arimo.ttf"));
                 break;
-            case "Caviar Dreams":
-                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/CaviarDreams.ttf"));
+            case "BEBAS":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/BEBAS.ttf"));
+                break;
+            case "Cartoonist":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Cartoonist.ttf"));
+                break;
+            case "Caviar":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Caviar.ttf"));
+                break;
+            case "Helsinki":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Helsinki.ttf"));
+                break;
+            case "Molengo":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Molengo.ttf"));
                 break;
             case "Lato":
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Lato.ttf"));
                 break;
-            case "Ostrich":
-                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/ostrich.ttf"));
+            case "Nobile":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Nobile.ttf"));
+                break;
+            case "Overlock":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Overlock.ttf"));
                 break;
             case "Oswald":
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Oswald.ttf"));
                 break;
-            case "Playfair":
-                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/PlayfairDisplay.otf"));
+            case "Paprika":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Paprika.ttf"));
                 break;
             case "Roboto":
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Roboto.ttf"));
                 break;
-            case "Titillium":
-                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Titillium.otf"));
+            case "Resagnicto":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Resagnicto.ttf"));
+                break;
+
+            case "Sansumi":
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Sansumi.ttf"));
                 break;
             case "Walkway":
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Walkway.ttf"));
                 break;
             default:
-                dataView.setTypeface(Typeface.DEFAULT);
+                dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Aller.ttf"));
                 break;
         }
         dataView.setTextColor(fontcolor);
