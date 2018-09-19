@@ -3,12 +3,15 @@ package com.fsociety2.dyslexiafriendlybuddy;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -20,6 +23,8 @@ import android.widget.Toast;
 
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainServiceActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
@@ -120,8 +125,9 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String toSpeak = dataView.getText().toString();
-                textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, null);
+                String dataString  = dataView.getText().toString();
+                setupHighlighter(dataString);
+                textToSpeech.speak(dataString, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
 
@@ -140,6 +146,53 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
     }
 
+    Timer timer;
+    TimerTask timerTask;
+
+    private void setupHighlighter(final String dataString) {
+        timer = new Timer();
+        final int[] i = {0};
+        final String[] arr = dataString.split(" ");
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        i[0]++;
+                        if (i[0] < arr.length) {
+                            Log.i(TAG, "highlighted text : " + arr[i[0]]);
+                            final String toSpeak = arr[i[0]].toUpperCase();
+                            String preString = "";
+                            int start = 0;
+                            int end = 0;
+                            if (i[0] > 0) {
+                                for (int j = 0; j < i[0]; j++) {
+                                    arr[j] = arr[j].toLowerCase();
+                                    preString = preString.concat(arr[j]);
+                                    preString = preString.concat(" ");
+                                }
+                            }
+                            Log.i(TAG, "highlighted text  start text: " + preString);
+                            Log.i(TAG, "highlighted text  start: " + start);
+                            start = preString.length();
+                            preString = preString.concat(arr[i[0]]);
+                            end = preString.length();
+                            Log.i(TAG, "highlighted text  end text: " + preString);
+                            Log.i(TAG, "highlighted text  end: " + end);
+
+
+                            final SpannableString spanString = new SpannableString(dataString);
+                            spanString.setSpan(new ForegroundColorSpan(Color.YELLOW), start, end, 0);
+                            dataView.setText(spanString);
+                            Log.i(TAG, "highlighted text  high: " + toSpeak);
+                        }
+                    }
+                });
+            }
+        };
+        timer.scheduleAtFixedRate(timerTask,0, (long) (speed*1000));
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
