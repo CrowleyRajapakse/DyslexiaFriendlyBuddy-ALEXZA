@@ -65,11 +65,22 @@
             android:padding="10dp"
             android:src="@drawable/ic_arrow_forward_black_24dp" />
 
+        <View
+            android:layout_width="20dp"
+            android:layout_height="1dp" />
+
         <Button
             android:id="@+id/btn_hw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:background="@drawable/button_style"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:text="H / W" />
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="1dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -98,6 +109,8 @@
             app:srcCompat="@drawable/ic_stop_black_24dp" />
 
     </LinearLayout>
+
+
     <!--
         <LinearLayout
             android:layout_width="match_parent"

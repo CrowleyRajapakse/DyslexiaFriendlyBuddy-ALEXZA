@@ -1,6 +1,7 @@
 package com.fsociety2.dyslexiafriendlybuddy;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,12 +9,16 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.text.Html;
+import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.util.TypedValue;
@@ -25,6 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.Timer;
@@ -60,6 +67,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
     private Activity activity;
     private Button btnMl;
+    private SpannableString spnString;
 
 
     SharedPreferences sharedPreferences;
@@ -85,6 +93,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
         textFromCam = getIntent().getExtras().getString("data");
         dataView.setText(textFromCam);
+        spnString = new SpannableString(textFromCam);
         //   dataView.setOnLongClickListener(new View.OnLongClickListener() {
 
         //      @Override
@@ -154,23 +163,43 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             @Override
             public void onClick(View v) {
 
+                final ProgressDialog progress = new ProgressDialog(MainServiceActivity.this);
+                progress.setTitle("Connecting...");
+                progress.setMessage("Fetching Data...");
+                progress.show();
+
+                Runnable progressRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.cancel();
+                    }
+                };
+
+                Handler pdCanceller = new Handler();
+                pdCanceller.postDelayed(progressRunnable, 3000);
+
                 if(!isInternetConnection()){
                     String text = "No Internet Access!";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
                     toast.show();
                 }else{
+                //    if(Arrays.asList(words).contains("Text")){
+                        ArrayList<String> hardWords = new ArrayList<String>();
+                        for(String word : words){
+                            if(word.length() >= 6){
+                                hardWords.add(word);
+                            }
+                        }
 
-                    if(Arrays.asList(words).contains("Text")){
-                        String text = "hard word ditected";
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
-                        toast.show();
-                    }
-                    Log.d(TAG, "words length $$$$$$$$$$$$$ : " + words.length + words[1]);
+                        for(String hw : hardWords){
+                            int primaryColor = Color.RED;
+                            dataView.setText(highlight(primaryColor, spnString, hw));
+                            spnString = new SpannableString(dataView.getText());
+                        }
 
+               //     }
                 }
-
             }
         });
 
@@ -408,5 +437,33 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
         return isConnected;
+    }
+
+    /**
+     * highlight a given word
+     * @param color
+     * @param original
+     * @param word
+     * @return
+     */
+    private Spannable highlight(int color, Spannable original, String word){
+        String normalized = Normalizer.normalize(original, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+
+        int start = normalized.indexOf(word);
+        if (start < 0) {
+            return original;
+        } else {
+            Spannable highlighted = new SpannableString(original);
+            while (start >= 0) {
+                int spanStart = Math.min(start, original.length());
+                int spanEnd = Math.min(start+word.length(), original.length());
+
+                highlighted.setSpan(new ForegroundColorSpan(color), spanStart,
+                        spanEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                start = normalized.indexOf(word, spanEnd);
+            }
+            return highlighted;
+        }
     }
 }
