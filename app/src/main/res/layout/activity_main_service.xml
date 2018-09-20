@@ -44,6 +44,16 @@
         android:gravity="end">
 
         <ImageView
+            android:id="@+id/tts_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circlebackgroundyellow"
+            android:src="@drawable/ic_settings_voice_black_24dp"
+            android:clickable="true"
+            android:padding="10dp"
+            android:layout_marginRight="15dp"/>
+
+        <ImageView
             android:id="@+id/tochunkinterface"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
