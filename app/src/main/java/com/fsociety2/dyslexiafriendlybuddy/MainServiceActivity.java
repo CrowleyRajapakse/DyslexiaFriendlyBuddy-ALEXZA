@@ -285,9 +285,9 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             if (textToSpeech.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE) {
                 //loading a language
                 textToSpeech.setLanguage(Locale.US);
-                pitch = sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_PITCH_RATE, 10);
+                pitch = (sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_PITCH_RATE, 10));
                 textToSpeech.setPitch(pitch);
-                speed = sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_SPEED_RATE, 10);
+                speed = (sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_SPEED_RATE, 10));
                 textToSpeech.setSpeechRate(speed);
             }
         }

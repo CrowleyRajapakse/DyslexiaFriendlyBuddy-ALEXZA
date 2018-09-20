@@ -57,11 +57,11 @@ public class TTS_SettingsActivity extends AppCompatActivity {
         Log.d("DASUSLOG", "Pitch GET Shared : " + sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_PITCH_RATE, 10));
         Log.d("DASUSLOG", "Speed GET Shared: " + sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_SPEED_RATE, 10));
 
-        final float previousPitch = sharedPreferences.getFloat(EXTRA_PITCH_RATE, 10);
+        final float previousPitch = (float) (sharedPreferences.getFloat(EXTRA_PITCH_RATE, 10) * 100.0);
         seekBarPitch.setProgress((int) previousPitch);
 
         seekBarSpeed.setOnSeekBarChangeListener(speedSeekBarListener);
-        float previousSpeed = sharedPreferences.getFloat(EXTRA_SPEED_RATE, 10);
+        float previousSpeed = (float) (sharedPreferences.getFloat(EXTRA_SPEED_RATE, 10) *100.0);
         Log.d(TAG, "speed rate: " + previousSpeed);
         seekBarSpeed.setProgress((int) previousSpeed);
 
@@ -165,7 +165,7 @@ public class TTS_SettingsActivity extends AppCompatActivity {
 
         Log.d("DASUSLOG", "Pitch update : " + value);
         if (value < 0.1) value = 0.1f;
-        pitch = value;
+        pitch = (float) (value / 100.0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat(EXTRA_PITCH_RATE, value);
         editor.apply();
@@ -174,7 +174,7 @@ public class TTS_SettingsActivity extends AppCompatActivity {
     private void updateSpeed(float value) {
         Log.d("DASUSLOG", "Speed update : " + value);
         if (value < 0.1) value = 0.1f;
-        speed = value;
+        speed = (float) (value / 100.0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putFloat(EXTRA_SPEED_RATE, value);
         editor.apply();
