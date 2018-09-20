@@ -39,7 +39,7 @@ import java.util.TimerTask;
 
 public class MainServiceActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
-    private ImageView listen;
+    private ImageView listen,ttsSettingBtn;
     private TextToSpeech textToSpeech;
     private float pitch;
     private float speed;
@@ -86,6 +86,8 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         stop = findViewById(R.id.btn_stop);
         button2 = findViewById(R.id.tochunkinterface);
         btnMl = findViewById(R.id.btn_hw);
+        ttsSettingBtn = findViewById(R.id.tts_settings);
+
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainServiceActivity.this.getApplicationContext());
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
@@ -136,6 +138,14 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             }
         });
 
+
+        ttsSettingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainServiceActivity.this, TTS_SettingsActivity.class);
+                MainServiceActivity.this.startActivity(intent);
+            }
+        });
 
         listen.setOnClickListener(new View.OnClickListener() {
             @Override

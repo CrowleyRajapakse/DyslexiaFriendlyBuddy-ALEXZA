@@ -25,11 +25,12 @@ public class TTS_SettingsActivity extends AppCompatActivity {
     private float speed;
     private SeekBar seekBarVolume;
     private AudioManager audioManager;
-    private ImageView ttsBackButton;
+    private ImageView ttsBackButton, ttsSaveButton;
 
     final static String EXTRA_PITCH_RATE = "pitch";
     final static String EXTRA_SPEED_RATE = "speed";
     final static String EXTRA_VOLUME_RATE = "volume";
+    private int pitchValue;
     private int maxValue;
     private int curValue;
     private String TAG = "speed rate";
@@ -48,14 +49,19 @@ public class TTS_SettingsActivity extends AppCompatActivity {
         textViewSpeed = (TextView) findViewById(R.id.speed_textView);
         // textViewVolume = (TextView) findViewById(R.id.volume_textView);
         ttsBackButton = findViewById(R.id.tts_backButton);
+        ttsSaveButton = findViewById(R.id.tts_settingSave);
 
         seekBarPitch.setOnSeekBarChangeListener(pitchSeekBarListener);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(TTS_SettingsActivity.this.getApplicationContext());
-        final float previousPitch = sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_PITCH_RATE, 10);
+
+        Log.d("DASUSLOG", "Pitch GET Shared : " + sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_PITCH_RATE, 10));
+        Log.d("DASUSLOG", "Speed GET Shared: " + sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_SPEED_RATE, 10));
+
+        final float previousPitch = sharedPreferences.getFloat(EXTRA_PITCH_RATE, 10);
         seekBarPitch.setProgress((int) previousPitch);
 
         seekBarSpeed.setOnSeekBarChangeListener(speedSeekBarListener);
-        float previousSpeed = sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_SPEED_RATE, 10);
+        float previousSpeed = sharedPreferences.getFloat(EXTRA_SPEED_RATE, 10);
         Log.d(TAG, "speed rate: " + previousSpeed);
         seekBarSpeed.setProgress((int) previousSpeed);
 
@@ -63,6 +69,23 @@ public class TTS_SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        ttsSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("DASUSLOG", "Pitch : " + pitch);
+                Log.d("DASUSLOG", "Speed : " + speed);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putFloat(EXTRA_PITCH_RATE, pitch);
+                editor.putFloat(EXTRA_SPEED_RATE, speed);
+                editor.apply();
+
+                Log.d("DASUSLOG", "Pitch Shared : " + sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_PITCH_RATE, 10));
+                Log.d("DASUSLOG", "Speed Shared: " + sharedPreferences.getFloat(TTS_SettingsActivity.EXTRA_SPEED_RATE, 10));
+
             }
         });
 //        seekBarVolume.setOnSeekBarChangeListener(volumeSeekBarListener);
@@ -139,18 +162,21 @@ public class TTS_SettingsActivity extends AppCompatActivity {
 //    }
 
     private void updatePitch(float value) {
-        pitch = value / 50;
-        if (pitch < 0.1) pitch = 0.1f;
+
+        Log.d("DASUSLOG", "Pitch update : " + value);
+        if (value < 0.1) value = 0.1f;
+        pitch = value;
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putFloat(EXTRA_PITCH_RATE, pitch);
+        editor.putFloat(EXTRA_PITCH_RATE, value);
         editor.apply();
     }
 
     private void updateSpeed(float value) {
-        speed = value / 50;
-        if (speed < 0.1) speed = 0.1f;
+        Log.d("DASUSLOG", "Speed update : " + value);
+        if (value < 0.1) value = 0.1f;
+        speed = value;
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putFloat(EXTRA_SPEED_RATE, speed);
+        editor.putFloat(EXTRA_SPEED_RATE, value);
         editor.apply();
     }
 
