@@ -173,27 +173,27 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             @Override
             public void onClick(View v) {
 
-                final ProgressDialog progress = new ProgressDialog(MainServiceActivity.this);
-                progress.setTitle("Connecting...");
-                progress.setMessage("Fetching Data...");
-                progress.show();
-
-                Runnable progressRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        progress.cancel();
-                    }
-                };
-
-                Handler pdCanceller = new Handler();
-                pdCanceller.postDelayed(progressRunnable, 3000);
-
                 if(!isInternetConnection()){
                     String text = "No Internet Access!";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
                     toast.show();
                 }else{
+
+                    final ProgressDialog progress = new ProgressDialog(MainServiceActivity.this);
+                    progress.setTitle("Connecting...");
+                    progress.setMessage("Fetching Data...");
+                    progress.show();
+
+                    Runnable progressRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            progress.cancel();
+                        }
+                    };
+
+                    Handler pdCanceller = new Handler();
+                    pdCanceller.postDelayed(progressRunnable, 3000);
                 //    if(Arrays.asList(words).contains("Text")){
                         ArrayList<String> hardWords = new ArrayList<String>();
                         for(String word : words){
