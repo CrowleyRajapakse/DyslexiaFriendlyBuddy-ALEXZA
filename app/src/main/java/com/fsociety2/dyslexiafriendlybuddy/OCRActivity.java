@@ -30,13 +30,14 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Scalar;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-public class OCRActivity extends AppCompatActivity  {
+public class OCRActivity extends AppCompatActivity  implements CameraBridgeViewBase.CvCameraViewListener2{
 
     SurfaceView cameraView;
     TextView textView;
@@ -44,7 +45,40 @@ public class OCRActivity extends AppCompatActivity  {
     final int RequestCameraPermissionID = 1001;
     TextRecognizer textRecognizer;
 
+    JavaCameraView javaCameraView;
+    Mat mRgba, imgGray, imgCanny;
 
+    static {
+
+        if (OpenCVLoader.initDebug())
+
+        {
+            Log.i("TAG", "OpenCv Loaded");
+
+        } else
+
+        {
+            Log.i("TAG", "OpenCv Failed");
+
+        }
+    }
+
+    BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            switch (status){
+                case BaseLoaderCallback.SUCCESS:{
+                    javaCameraView.enableView();
+                    break;
+                }
+                default:{
+                    super.onManagerConnected(status);
+                    break;
+                }
+            }
+
+        }
+    };
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -70,16 +104,16 @@ public class OCRActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_ocr);
 
 
-        /**
-        javaCameraView = findViewById(R.id.opencv_view);
-        javaCameraView.setVisibility(SurfaceView.VISIBLE);
+
+        javaCameraView = findViewById(R.id.opencv_view1);
+        javaCameraView.setVisibility(SurfaceView.INVISIBLE);
        // cameraView = javaCameraView;
         //
        // cameraView = findViewById(R.id.opencv_view);
 
 
         javaCameraView.setCvCameraViewListener(this);
-         **/
+
         cameraView = findViewById(R.id.surface_view);
         textView = findViewById(R.id.text_view);
 
@@ -110,27 +144,6 @@ public class OCRActivity extends AppCompatActivity  {
                         }
                         cameraSource.start(cameraView.getHolder());
 
-                       // VideoCapture videoCapture = new VideoCapture(cameraSource.);
-                       // ImageView i = (ImageView) cameraSource.takePicture();
-/*
-                                Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.id.surface_view);
-                        Mat srcMat = new Mat ( bmp.getHeight(), bmp.getWidth(), CvType.CV_8UC3);
-
-                        Bitmap myBitmap32 = bmp.copy(Bitmap.Config.ARGB_8888, true);
-
-                        Utils.bitmapToMat(myBitmap32, srcMat);
-
-                        Mat gray = new Mat(srcMat.size(), CvType.CV_8UC1);
-                        Imgproc.cvtColor(srcMat, gray, Imgproc.COLOR_RGB2GRAY);
-                        Mat edge = new Mat();
-                        Mat dst = new Mat();
-                        Imgproc.Canny(gray, edge, 80, 90);
-                        Imgproc.cvtColor(edge, dst, Imgproc.COLOR_GRAY2RGBA,4);
-                        Bitmap resultBitmap = Bitmap.createBitmap(dst.cols(), dst.rows(),Bitmap.Config.ARGB_8888);
-                        Utils.matToBitmap(dst, resultBitmap);
-
-                        cameraView.set(resultBitmap);
-*/
                     }catch(IOException e){
                         e.printStackTrace();
                     }
@@ -197,7 +210,7 @@ public class OCRActivity extends AppCompatActivity  {
             }
         });
     }
-/*
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -246,7 +259,7 @@ public class OCRActivity extends AppCompatActivity  {
         mRgba = inputFrame.rgba();
         Imgproc.cvtColor(mRgba,imgGray,Imgproc.COLOR_RGB2GRAY);
         Imgproc.Canny(imgGray,imgCanny,50,150);
-        /*
+
         textRecognizer.setProcessor(new Detector.Processor<TextBlock>(){
             @Override
             public void release(){
@@ -275,6 +288,6 @@ public class OCRActivity extends AppCompatActivity  {
 
         return imgCanny;
     }
-    */
+
 
 }

@@ -4,13 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
-import android.widget.TextView;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.KeyPoint;
@@ -28,7 +28,7 @@ import java.util.List;
 public class OcrOpenCV extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2{
 
     JavaCameraView javaCameraView;
-   // TextView textView;
+
     Mat mRgba,mGray, imgGray, imgCanny;
     Scalar CONTOUR_COLOR;
 
@@ -125,6 +125,13 @@ public class OcrOpenCV extends AppCompatActivity implements CameraBridgeViewBase
         mRgba = inputFrame.rgba();
         mGray = inputFrame.gray();
 
+      //  Mat mRgbaT = mRgba.t();
+       // Mat mGrayT = mGray.t();
+       // Core.flip(mRgba.t(), mRgbaT, 1);
+       // Imgproc.resize(mRgbaT, mRgbaT, mRgba.size());
+       // Core.flip(mGray.t(), mGrayT, 1);
+      //  Imgproc.resize(mGrayT, mGrayT, mGray.size());
+
         CONTOUR_COLOR = new Scalar(255);
         MatOfKeyPoint keypoint = new MatOfKeyPoint();
         List<KeyPoint> listpoint = new ArrayList<KeyPoint>();
@@ -195,7 +202,7 @@ public class OcrOpenCV extends AppCompatActivity implements CameraBridgeViewBase
 
             //return mRgba;
         }
-        Imgproc.cvtColor(mRgba,imgGray,Imgproc.COLOR_RGB2GRAY);
+         Imgproc.cvtColor(mRgba,imgGray,Imgproc.COLOR_RGB2GRAY);
         Imgproc.Canny(imgGray,imgCanny,50,150);
         return imgCanny;
     }
