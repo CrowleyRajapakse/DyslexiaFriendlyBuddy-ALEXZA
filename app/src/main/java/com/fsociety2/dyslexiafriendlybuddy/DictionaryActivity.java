@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -37,6 +38,7 @@ public class DictionaryActivity extends AppCompatActivity {
     TextView phoneticText;
     TextView morphText;
     TextView defText;
+    ImageView ivHardWord;
 
 
     MyDictionaryRequest myDictionaryRequest;
@@ -57,6 +59,7 @@ public class DictionaryActivity extends AppCompatActivity {
         morphText = findViewById(R.id.morphText);
         defText = findViewById(R.id.defText);
         exampleImage = findViewById(R.id.exampleImage);
+        ivHardWord = findViewById(R.id.ivHardWord);
 
         if (getIntent().getStringExtra(Intent.EXTRA_PROCESS_TEXT) != null) {
             senttext = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
@@ -64,6 +67,17 @@ public class DictionaryActivity extends AppCompatActivity {
             editText.setText(senttext);
 
         }
+
+        ivHardWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String text = "Thanks For Contributing ALEXZA Project !";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(DictionaryActivity.this, text, duration);
+                toast.show();
+            }
+        });
 
     }
 
