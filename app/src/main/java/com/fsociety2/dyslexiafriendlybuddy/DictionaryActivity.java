@@ -20,8 +20,11 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.io.InputStream;
+import java.util.Locale;
 
-public class DictionaryActivity extends AppCompatActivity {
+public class DictionaryActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+    MediaStore.Audio audioFile;
+
     String urlx;
     String def;
     String morph;
@@ -37,6 +40,8 @@ public class DictionaryActivity extends AppCompatActivity {
     TextView defText;
     ImageView ivHardWord;
 
+    ImageView listenDef, listenExample, listenWord;
+    TextToSpeech tts;
 
     MyDictionaryRequest myDictionaryRequest;
     MorphologicalStructure morphStructure;
@@ -50,13 +55,19 @@ public class DictionaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dictionary);
 
         editText = findViewById(R.id.editText);
-
         exampleText = findViewById(R.id.exampleText);
         phoneticText = findViewById(R.id.phoneticText);
         morphText = findViewById(R.id.morphText);
         defText = findViewById(R.id.defText);
         exampleImage = findViewById(R.id.exampleImage);
         ivHardWord = findViewById(R.id.ivHardWord);
+        listenDef = findViewById(R.id.defsound);
+        listenExample = findViewById(R.id.Examplesound);
+        listenWord = findViewById(R.id.pronouncesound);
+
+        Intent intent = new Intent();
+        intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(intent, 1);
 
         if (getIntent().getStringExtra(Intent.EXTRA_PROCESS_TEXT) != null) {
             senttext = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
@@ -64,6 +75,30 @@ public class DictionaryActivity extends AppCompatActivity {
             editText.setText(senttext);
 
         }
+
+        listenWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dataString = editText.getText().toString();
+                tts.speak(dataString, TextToSpeech.QUEUE_FLUSH, null, null);
+            }
+        });
+
+        listenDef.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dataString = defText.getText().toString();
+                tts.speak(dataString, TextToSpeech.QUEUE_FLUSH, null, null);
+            }
+        });
+
+        listenExample.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dataString = exampleText.getText().toString();
+                tts.speak(dataString, TextToSpeech.QUEUE_FLUSH, null, null);
+            }
+        });
 
         ivHardWord.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +113,56 @@ public class DictionaryActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                //create the TTS instance
+                tts = new TextToSpeech(this, this);
+            } else {
+                //missing data will be installed
+                Intent intent = new Intent();
+                intent.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(intent);
+            }
+        }
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            if (tts.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_AVAILABLE) {
+                //loading a language
+                tts.setLanguage(Locale.US);
+            }
+        }
+        if (status == TextToSpeech.ERROR) {
+            Toast.makeText(getApplicationContext(), "Sorry! Text to Speech failed ... ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (tts != null) {
+            //.setPitch(pitch);
+            // textToSpeech.setSpeechRate(speed);
+        } else {
+            Intent intent = new Intent();
+            intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+            startActivityForResult(intent, 1);
+        }
+    }
 
     public void requestApiButtonClick(View v) {
         defText.setText("");
