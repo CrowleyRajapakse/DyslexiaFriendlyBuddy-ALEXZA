@@ -41,7 +41,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
     TextView defText;
     ImageView ivHardWord;
 
-    ImageView listenDef, listenExample;
+    ImageView listenDef, listenExample, listenWord;
     TextToSpeech tts;
 
     MyDictionaryRequest myDictionaryRequest;
@@ -56,7 +56,6 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
         setContentView(R.layout.activity_dictionary);
 
         editText = findViewById(R.id.editText);
-
         exampleText = findViewById(R.id.exampleText);
         phoneticText = findViewById(R.id.phoneticText);
         morphText = findViewById(R.id.morphText);
@@ -65,6 +64,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
         ivHardWord = findViewById(R.id.ivHardWord);
         listenDef = findViewById(R.id.defsound);
         listenExample = findViewById(R.id.Examplesound);
+        listenWord = findViewById(R.id.pronouncesound);
 
         Intent intent = new Intent();
         intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
@@ -76,6 +76,14 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
             editText.setText(senttext);
 
         }
+
+        listenWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dataString = editText.getText().toString();
+                tts.speak(dataString, TextToSpeech.QUEUE_FLUSH, null, null);
+            }
+        });
 
         listenDef.setOnClickListener(new View.OnClickListener() {
             @Override
