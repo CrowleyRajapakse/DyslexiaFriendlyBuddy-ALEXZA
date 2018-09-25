@@ -12,63 +12,89 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
-        android:orientation="vertical"
-        android:focusableInTouchMode="true">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:paddingTop="30dp"
-        android:text="@string/pitchRate"
-        android:textSize="16dp" />
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/pitch_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar_pitch"
-        android:layout_gravity="center"
-        android:text="0%"
-        android:textSize="18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:paddingTop="30dp"
+            android:text="@string/pitchRate"
+            android:textSize="16dp" />
 
-
-    <SeekBar
-        android:id="@+id/seekBar_pitch"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:progress="50" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:paddingTop="10dp"
-        android:text="@string/speedRate"
-        android:textSize="16dp" />
-
-    <TextView
-        android:id="@+id/speed_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar_speed"
-        android:layout_gravity="center"
-        android:text="0%"
-        android:textSize="18dp" />
+        <TextView
+            android:id="@+id/pitch_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seekBar_pitch"
+            android:layout_gravity="center"
+            android:text="0%"
+            android:textSize="18dp" />
 
 
-    <SeekBar
-        android:id="@+id/seekBar_speed"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:progress="50" />
+        <SeekBar
+            android:id="@+id/seekBar_pitch"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:progress="50" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:paddingTop="10dp"
+            android:text="@string/speedRate"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/speed_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seekBar_speed"
+            android:layout_gravity="center"
+            android:text="0%"
+            android:textSize="18dp" />
+
+
+        <SeekBar
+            android:id="@+id/seekBar_speed"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:progress="50" />
     </LinearLayout>
 
+    <!--<LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:paddingTop="10dp"
+            android:text="@string/textHighlight"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/highlight_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_style"
+            android:text="@string/highlightColors"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,12 +104,12 @@
             android:id="@+id/tts_settingSave"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="300dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="180dp"
             android:background="@drawable/circlebackgroundyellow"
             android:padding="10dp"
-            android:src="@drawable/ic_save_black_24dp"/>
+            android:src="@drawable/ic_save_black_24dp" />
 
         <ImageView
             android:id="@+id/tts_backButton"
@@ -91,36 +117,36 @@
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="180dp"
             android:background="@drawable/circlebackgroundyellow"
             android:padding="10dp"
             android:src="@drawable/ic_arrow_back_black_24dp" />
     </LinearLayout>
-<!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:paddingTop="30dp"
-        android:text="@string/volume"
-        android:textSize="16dp" />
+    <!--
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:paddingTop="30dp"
+            android:text="@string/volume"
+            android:textSize="16dp" />
 
-    <TextView
-        android:id="@+id/volume_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/seekBar_volume"
-        android:layout_gravity="center"
-        android:text="0%"
-        android:textSize="18dp" />
+        <TextView
+            android:id="@+id/volume_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seekBar_volume"
+            android:layout_gravity="center"
+            android:text="0%"
+            android:textSize="18dp" />
 
-    <SeekBar
-        android:id="@+id/seekBar_volume"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:progress="50" />
--->
+        <SeekBar
+            android:id="@+id/seekBar_volume"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:progress="50" />
+    -->
 </LinearLayout>
