@@ -91,6 +91,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="1dp"
+                    android:padding="10dp"
                     android:background="@drawable/circlebackgroundyellow"
                     android:onClick="requestApiButtonClick"
                     android:src="@drawable/ic_format_align_left_black_24dp"
@@ -98,13 +99,11 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:layout_marginTop="20dp">
-
 
                 <TextView
                     android:id="@+id/pronounce"
@@ -145,7 +144,6 @@
 
             </LinearLayout>
 
-
             <TextView
                 android:id="@+id/defText"
                 android:layout_width="match_parent"
@@ -157,7 +155,6 @@
                 android:textColor="#000000"
                 android:textSize="17sp"
                 android:background="#E8E8E8"/>
-
 
             >
 
@@ -183,7 +180,6 @@
                 android:layout_marginStart="10sp"
                 android:layout_marginEnd="10sp"/>
 
-
             <TextView
                 android:id="@+id/text6"
                 android:layout_width="wrap_content"
@@ -206,8 +202,6 @@
                 android:layout_marginStart="10sp"
                 android:layout_marginEnd="10sp"/>
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -228,8 +222,6 @@
                     android:src="@drawable/ic_volume_up_black_24dp" />
 
         </LinearLayout>
-
-
 
             <TextView
                 android:id="@+id/exampleText"
@@ -256,9 +248,10 @@
             <ImageView
                 android:id="@+id/exampleImage"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_image_black_24dp" />
+                android:layout_height="300dp"
+                android:src="@drawable/ic_image_black_24dp"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"/>
 
         </LinearLayout>
     </ScrollView>

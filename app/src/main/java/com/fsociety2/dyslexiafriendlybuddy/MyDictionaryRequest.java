@@ -25,18 +25,14 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
     final String app_id = "52b34dcb";
     final String app_key = "e5f510fa088c57d3cad7f1af28abe345";
     String myurl;
-    String inflection;
     String def;
     String example;
     String phonetic;
-
     Context context;
     TextView textView3;
     TextView exampleText;
     TextView phoneticText;
 
-
-    private String phon;
 
     MyDictionaryRequest(Context context, TextView textView3, TextView exampleText, TextView phoneticText) {
         this.context = context;
@@ -110,7 +106,6 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
 
 
             JSONObject pp = pronounce.getJSONObject(0);
-          //  phonetic = pp.getString("phoneticSpelling");
             phonetic= pp.optString("phoneticSpelling");
 
             phoneticText.setText(phonetic);

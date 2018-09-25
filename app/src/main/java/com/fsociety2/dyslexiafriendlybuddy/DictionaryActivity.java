@@ -24,6 +24,7 @@ import java.util.Locale;
 
 public class DictionaryActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
     MediaStore.Audio audioFile;
+
     String urlx;
     String def;
     String morph;
@@ -31,8 +32,6 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
     String data;
     EditText editText;
     ImageView exampleImage;
-
-    //  TextView textView3;
 
 
     TextView exampleText;
@@ -179,9 +178,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
         defText.setText(def);
         addImage();
 
-
     }
-
 
     private String dictionaryEntries() {
         final String language = "en";

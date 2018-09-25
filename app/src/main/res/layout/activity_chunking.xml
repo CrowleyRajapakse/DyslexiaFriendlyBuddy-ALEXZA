@@ -60,7 +60,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:selectAllOnFocus="true"
                     android:text="@string/word_count" />
 
                 <EditText
@@ -118,7 +117,6 @@
                     android:layout_weight="1"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:fontFamily=""
                     android:text="Background color"
                     android:background="@drawable/button_style"
                     android:textSize="13sp"
@@ -193,7 +191,6 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/circlebackgroundyellow"
-                android:contentDescription="@string/todo"
                 android:padding="10dp"
                 android:src="@drawable/ic_save_black_24dp" />
 
@@ -208,7 +205,6 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/circlebackgroundyellow"
-                android:contentDescription="@string/todo"
                 android:padding="10dp"
                 android:src="@drawable/ic_arrow_back_black_24dp" />
         </LinearLayout>
