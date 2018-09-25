@@ -159,6 +159,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             public void onClick(View v) {
                 if (textToSpeech != null) {
                     textToSpeech.stop();
+                    timer.cancel();
                 }
             }
         });
