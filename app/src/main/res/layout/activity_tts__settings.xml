@@ -104,9 +104,9 @@
             android:id="@+id/tts_settingSave"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="100dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="300dp"
             android:background="@drawable/circlebackgroundyellow"
             android:padding="10dp"
             android:src="@drawable/ic_save_black_24dp" />
@@ -117,7 +117,7 @@
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="300dp"
             android:background="@drawable/circlebackgroundyellow"
             android:padding="10dp"
             android:src="@drawable/ic_arrow_back_black_24dp" />
