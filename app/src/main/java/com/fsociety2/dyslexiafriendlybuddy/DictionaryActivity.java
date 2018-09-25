@@ -22,7 +22,7 @@ import org.w3c.dom.Text;
 import java.io.InputStream;
 import java.util.Locale;
 
-public class DictionaryActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
+public class DictionaryActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
     MediaStore.Audio audioFile;
     String urlx;
     String def;
@@ -41,9 +41,8 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
     TextView defText;
     ImageView ivHardWord;
 
-    ImageView listenDef;
+    ImageView listenDef, listenExample;
     TextToSpeech tts;
-    TextView defTextView;
 
     MyDictionaryRequest myDictionaryRequest;
     MorphologicalStructure morphStructure;
@@ -65,6 +64,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
         exampleImage = findViewById(R.id.exampleImage);
         ivHardWord = findViewById(R.id.ivHardWord);
         listenDef = findViewById(R.id.defsound);
+        listenExample = findViewById(R.id.Examplesound);
 
         Intent intent = new Intent();
         intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
@@ -81,6 +81,14 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
             @Override
             public void onClick(View view) {
                 String dataString = defText.getText().toString();
+                tts.speak(dataString, TextToSpeech.QUEUE_FLUSH, null, null);
+            }
+        });
+
+        listenExample.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dataString = exampleText.getText().toString();
                 tts.speak(dataString, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
