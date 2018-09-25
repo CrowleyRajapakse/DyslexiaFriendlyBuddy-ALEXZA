@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:gravity="end">
 
+
         <ImageView
             android:id="@+id/tts_settings"
             android:layout_width="wrap_content"
@@ -65,15 +66,6 @@
         <View
             android:layout_width="20dp"
             android:layout_height="1dp" />
-
-        <ImageView
-            android:id="@+id/nextchunk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/circlebackgroundyellow"
-            android:clickable="true"
-            android:padding="10dp"
-            android:src="@drawable/ic_arrow_forward_black_24dp" />
 
         <View
             android:layout_width="20dp"
@@ -99,24 +91,46 @@
         android:gravity="center">
 
         <ImageView
+            android:id="@+id/backward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circlebackgroundyellow"
+            android:clickable="true"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
+
+        <ImageView
             android:id="@+id/btn_play"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="30dp"
-            android:background="@null"
+            android:background="@drawable/circlebackgroundyellow"
             android:clickable="true"
             app:srcCompat="@drawable/ic_play_circle_filled_black_24dp" />
 
         <ImageView
             android:id="@+id/btn_stop"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="30dp"
             android:clickable="true"
+            android:theme="@style/Widget.Design.FloatingActionButton"
             app:srcCompat="@drawable/ic_stop_black_24dp" />
+
+        <ImageView
+            android:id="@+id/nextchunk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circlebackgroundyellow"
+            android:clickable="true"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_arrow_forward_black_24dp" />
 
     </LinearLayout>
 
