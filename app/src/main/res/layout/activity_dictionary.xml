@@ -35,19 +35,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:layout_margin="20dp"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical">
+            android:focusableInTouchMode="true">
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="DICTIONARY"
                 android:textSize="30sp"
-                android:textStyle="bold" />
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="DICTIONARY"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,6 +78,7 @@
                     android:background="@drawable/circlebackgroundyellow"
                     android:onClick="requestApiButtonClick"
                     android:src="@drawable/ic_search_black_24dp"
+
                     />
 
                 <View
@@ -99,8 +101,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:layout_marginTop="20dp">
 
 
                 <TextView
@@ -109,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/definition"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
 
                 <ImageView
                     android:id="@+id/defsound"
@@ -124,13 +126,13 @@
                 android:id="@+id/defText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10sp"
-                android:layout_marginStart="10sp"
                 android:layout_marginTop="20dp"
-                android:background="#E8E8E8"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
                 android:ems="10"
                 android:textColor="#000000"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:background="#E8E8E8"/>
 
 
             >
@@ -139,23 +141,23 @@
                 android:id="@+id/text4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:text="@string/phonotic_notation"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/phoneticText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10sp"
-                android:layout_marginStart="10sp"
-                android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:background="#E8E8E8"
+                android:textSize="30sp"
+                android:layout_marginTop="20dp"
                 android:textColor="#000000"
-                android:textSize="30sp" />
+                android:background="#E8E8E8"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"/>
 
 
             <TextView
@@ -164,22 +166,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Morphological Notation:"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/morphText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10sp"
-                android:layout_marginStart="10sp"
-                android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:background="#E8E8E8"
-                android:ems="10"
+                android:layout_marginTop="20dp"
+                android:textSize="30sp"
                 android:textColor="#000000"
-                android:textSize="30sp" />
+                android:ems="10"
+                android:background="#E8E8E8"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"/>
 
             <TextView
                 android:id="@+id/text5"
@@ -188,42 +189,37 @@
                 android:layout_marginTop="20dp"
                 android:text="Example:"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/exampleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10sp"
-                android:layout_marginStart="10sp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:background="#E8E8E8"
-                android:ems="10"
+                android:textSize="17sp"
                 android:textColor="#000000"
-                android:textSize="17sp" />
+                android:ems="10"
+                android:background="#E8E8E8"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/Image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:text="Example Image:"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/exampleImage"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:id="@+id/exampleImage1"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_image_black_24dp" />
-
-                <ImageView
-                    android:id="@+id/exampleImage2"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_image_black_24dp" />
-            </LinearLayout>
+                android:src="@drawable/ic_image_black_24dp" />
 
         </LinearLayout>
     </ScrollView>

@@ -39,7 +39,7 @@ import java.util.TimerTask;
 
 public class MainServiceActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
-    private ImageView listen, ttsSettingBtn;
+    private ImageView listen, ttsSettingBtn, backwardBtn;
     private TextToSpeech textToSpeech;
     private float pitch;
     private float speed;
@@ -87,6 +87,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         button2 = findViewById(R.id.tochunkinterface);
         btnMl = findViewById(R.id.btn_hw);
         ttsSettingBtn = findViewById(R.id.tts_settings);
+        backwardBtn = findViewById(R.id.backward);
 
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainServiceActivity.this.getApplicationContext());
@@ -136,6 +137,20 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             }
         });
 
+        backwardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (currentPage > 0) {
+                    currentPage--;
+                    dataView.setText(pages[currentPage]);
+                } else {
+                    String text = "No pages left!";
+                    Toast toast = Toast.makeText(MainServiceActivity.this, text, Toast.LENGTH_SHORT);
+                    toast.show();
+
+                }
+            }
+        });
 
         ttsSettingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,6 +174,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             public void onClick(View v) {
                 if (textToSpeech != null) {
                     textToSpeech.stop();
+                    timer.cancel();
                 }
             }
         });
@@ -218,7 +234,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
     private void setupHighlighter(final String dataString) {
         timer = new Timer();
-        final int[] i = {0};
+        final int[] i = {-1};
         final String[] arr = dataString.split(" ");
         timerTask = new TimerTask() {
             @Override

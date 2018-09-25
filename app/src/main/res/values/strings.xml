@@ -112,6 +112,8 @@
     <string name="pitchRate">Pitch</string>
     <string name="speedRate">Speed</string>
     <string name="volume">Volume</string>
+    <string name="textHighlight">Text Highlight Colors</string>
+    <string name="highlightColors">Highlight Colors</string>
 
     <!-- string related to chunking and dictionary -->
     <string name="chunk">Chunk</string>

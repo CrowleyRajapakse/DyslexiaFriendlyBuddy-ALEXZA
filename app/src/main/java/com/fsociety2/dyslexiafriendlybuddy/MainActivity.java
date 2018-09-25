@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_dictionary) {
-            Intent intent = new Intent(this, ChunkingActivity.class);
+            Intent intent = new Intent(this, DictionaryActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
