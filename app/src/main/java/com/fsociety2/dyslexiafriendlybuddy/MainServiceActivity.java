@@ -39,7 +39,7 @@ import java.util.TimerTask;
 
 public class MainServiceActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
-    private ImageView listen,ttsSettingBtn;
+    private ImageView listen, ttsSettingBtn;
     private TextToSpeech textToSpeech;
     private float pitch;
     private float speed;
@@ -90,23 +90,21 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainServiceActivity.this.getApplicationContext());
-        textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
+        textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 100);
+        wordCount = sharedPreferences.getInt(ChunkingActivity.EXTRA_WORD_COUNT, 0);
+        fontstyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "Aller");
+        fontcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_COLOR, 0xFF0000);
+        backcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_BACK_COLOR, 0xFFFF00);
 
 
         textFromCam = getIntent().getExtras().getString("data");
+        dataView.setTextColor(Color.parseColor("#FF0000"));
+        dataView.setBackgroundColor(Color.parseColor("#FFFF00"));
         dataView.setText(textFromCam);
-        spnString = new SpannableString(textFromCam);
-        //   dataView.setOnLongClickListener(new View.OnLongClickListener() {
+        dataView.setTextSize(100);
 
-        //      @Override
-        //   public boolean onLongClick(View v) {
-        //    String text = "Reading Finished!";
-        //   int duration = Toast.LENGTH_SHORT;
-        //    Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
-        //   toast.show();
-        //   return false;
-        // }
-        // });
+        spnString = new SpannableString(textFromCam);
+
         Log.d("LOGCATCHUNK", "Text : " + dataView.getText());
         dataView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
@@ -150,7 +148,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String dataString  = dataView.getText().toString();
+                String dataString = dataView.getText().toString();
                 setupHighlighter(dataString);
                 textToSpeech.speak(dataString, TextToSpeech.QUEUE_FLUSH, null, null);
             }
@@ -173,12 +171,12 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             @Override
             public void onClick(View v) {
 
-                if(!isInternetConnection()){
+                if (!isInternetConnection()) {
                     String text = "No Internet Access!";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(MainServiceActivity.this, text, duration);
                     toast.show();
-                }else{
+                } else {
 
                     final ProgressDialog progress = new ProgressDialog(MainServiceActivity.this);
                     progress.setTitle("Connecting...");
@@ -194,21 +192,21 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
                     Handler pdCanceller = new Handler();
                     pdCanceller.postDelayed(progressRunnable, 3000);
-                //    if(Arrays.asList(words).contains("Text")){
-                        ArrayList<String> hardWords = new ArrayList<String>();
-                        for(String word : words){
-                            if(word.length() >= 6){
-                                hardWords.add(word);
-                            }
+                    //    if(Arrays.asList(words).contains("Text")){
+                    ArrayList<String> hardWords = new ArrayList<String>();
+                    for (String word : words) {
+                        if (word.length() >= 6) {
+                            hardWords.add(word);
                         }
+                    }
 
-                        for(String hw : hardWords){
-                            int primaryColor = Color.RED;
-                            dataView.setText(highlight(primaryColor, spnString, hw));
-                            spnString = new SpannableString(dataView.getText());
-                        }
+                    for (String hw : hardWords) {
+                        int primaryColor = Color.RED;
+                        dataView.setText(highlight(primaryColor, spnString, hw));
+                        spnString = new SpannableString(dataView.getText());
+                    }
 
-               //     }
+                    //     }
                 }
             }
         });
@@ -260,7 +258,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
                 });
             }
         };
-        timer.scheduleAtFixedRate(timerTask,0, (long) (speed*1000));
+        timer.scheduleAtFixedRate(timerTask, 0, (long) (speed * 1000));
     }
 
     @Override
@@ -308,7 +306,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     @Override
     protected void onResume() {
         super.onResume();
-        textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
+        textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 100);
         wordCount = sharedPreferences.getInt(ChunkingActivity.EXTRA_WORD_COUNT, 0);
         fontstyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "Aller");
         fontcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_COLOR, 0xFF0000);
@@ -437,9 +435,10 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
     /**
      * check internect connection of the device
+     *
      * @return
      */
-    public boolean isInternetConnection(){
+    public boolean isInternetConnection() {
 
         ConnectivityManager cm = (ConnectivityManager) MainServiceActivity.this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
@@ -451,12 +450,13 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
     /**
      * highlight a given word
+     *
      * @param color
      * @param original
      * @param word
      * @return
      */
-    private Spannable highlight(int color, Spannable original, String word){
+    private Spannable highlight(int color, Spannable original, String word) {
         String normalized = Normalizer.normalize(original, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
 
         int start = normalized.indexOf(word);
@@ -466,7 +466,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
             Spannable highlighted = new SpannableString(original);
             while (start >= 0) {
                 int spanStart = Math.min(start, original.length());
-                int spanEnd = Math.min(start+word.length(), original.length());
+                int spanEnd = Math.min(start + word.length(), original.length());
 
                 highlighted.setSpan(new ForegroundColorSpan(color), spanStart,
                         spanEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

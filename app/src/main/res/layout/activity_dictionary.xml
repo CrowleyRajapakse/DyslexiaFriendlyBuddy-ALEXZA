@@ -3,9 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
+
     android:orientation="vertical"
     tools:context=".DictionaryActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarch"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarch"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="Chunk and Text Formatting"/>
+
+
+    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,7 +35,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_margin="20dp"
+            android:focusableInTouchMode="true">
 
 
             <TextView
@@ -24,12 +47,13 @@
                 android:textSize="30sp"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:text="Dictionary"
+                android:text="DICTIONARY"
                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
 
                 <EditText
                     android:id="@+id/editText"
@@ -71,10 +95,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/definition"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
 
                 <ImageView
-                    android:id="@+id/sound"
+                    android:id="@+id/defsound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_volume_up_black_24dp" />
@@ -83,20 +108,17 @@
 
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_marginTop="20dp"
-                android:textSize="17sp"
-                android:textColor="#000000"
-                android:ems="10" />
-
-
-            <LinearLayout
+                android:id="@+id/defText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:layout_marginTop="20dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
+                android:ems="10"
+                android:textColor="#000000"
+                android:textSize="17sp"
+                android:background="#E8E8E8"/>
+
 
                 >
 
@@ -106,48 +128,49 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/phonotic_notation"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/phoneticText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="#000000"/>
+                    android:textSize="30sp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="#000000"
+                    android:background="#E8E8E8"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginEnd="10sp"/>
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical">
+
 
                 <TextView
                     android:id="@+id/text6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:text="Morphological Notation:"
+                    android:textStyle="bold"
                     android:textSize="20sp" />
 
-                <ImageView
-                    android:id="@+id/morphSound"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_volume_up_black_24dp" />
 
-            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/morphText"
                 android:layout_width="match_parent"
-                android:layout_height="30sp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginTop="20dp"
-                android:textSize="15sp"
-                android:ems="10" />
+                android:textSize="30sp"
+                android:textColor="#000000"
+                android:ems="10"
+                android:background="#E8E8E8"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"/>
 
             <TextView
                 android:id="@+id/text5"
@@ -155,17 +178,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Example:"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/exampleText"
                 android:layout_width="match_parent"
-                android:layout_height="75dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:textSize="17sp"
                 android:textColor="#000000"
-                android:ems="10" />
+                android:ems="10"
+                android:background="#E8E8E8"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

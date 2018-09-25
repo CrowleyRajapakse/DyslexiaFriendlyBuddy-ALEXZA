@@ -1,6 +1,7 @@
 package com.fsociety2.dyslexiafriendlybuddy;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.MediaStore;
@@ -19,31 +20,42 @@ public class DictionaryActivity extends AppCompatActivity {
     MediaStore.Audio audioFile;
     String urlx;
     String def;
+    String morph;
     String senttext;
+    String data;
     EditText editText;
-    TextView textView3;
+
+  //  TextView textView3;
+
+
     TextView exampleText;
     TextView phoneticText;
     TextView morphText;
-    private TextToSpeech textToSpeech;
-    MyDictionaryRequest myDictionaryRequest;
-    ImageView sound;
+    TextView defText;
 
+
+    MyDictionaryRequest myDictionaryRequest;
+    MorphologicalStructure morphStructure;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //getSupportActionBar().setTitle("Whatever title");
         super.onCreate(savedInstanceState);
+        setTitle(R.string.your_title);
         setContentView(R.layout.activity_dictionary);
-     //   final ActionBar actionBar = getActionBar();
-     //   getActionBar().setTitle("Your title");
+    //  final ActionBar actionBar = getActionBar();
+     // getActionBar().setTitle("Your title");
         editText = findViewById(R.id.editText);
-        textView3 = findViewById(R.id.textView3);
+       // textView3 = findViewById(R.id.defText);
         exampleText=findViewById(R.id.exampleText);
         phoneticText=findViewById(R.id.phoneticText);
         morphText=findViewById(R.id.morphText);
+        defText=findViewById(R.id.defText);
 
+      //  listenDef = findViewById(R.id.defsound);
+      //  listenExample = findViewById(R.id.morphSound);
 
         if(getIntent().getStringExtra(Intent.EXTRA_PROCESS_TEXT) != null){
             senttext = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
@@ -56,16 +68,32 @@ public class DictionaryActivity extends AppCompatActivity {
 
 
     public void requestApiButtonClick(View v) {
-        myDictionaryRequest = new MyDictionaryRequest(this, textView3, exampleText, phoneticText);
-
+        defText.setText("");
+        phoneticText.setText("");
+        exampleText.setText("");
+        myDictionaryRequest = new MyDictionaryRequest(this, defText, exampleText, phoneticText);
+        morphStructure= new MorphologicalStructure ();
         urlx= dictionaryEntries();
+        data= editText.getText().toString().toLowerCase();
+        morph=morphStructure.Morphlogical(data);
+        morphText.setText(morph);
         myDictionaryRequest.execute(urlx);
-        textView3.setText(def);
-        morphologicalStrcuture(senttext);
+        defText.setText(def);
 
 
 
     }
+
+
+      //  public void onClick(View v) {
+
+          //  String dataString  = defText.getText().toString();
+         //   Log.d("DICTLOG", "string : " + dataString);
+         //   dictTTS.setPitch(pitch);
+         //   dictTTS.setSpeechRate(speed);
+          //  dictTTS.speak(dataString, dictTTS.QUEUE_ADD, null, null);
+       // }
+
 
 
     private String dictionaryEntries() {
@@ -76,10 +104,5 @@ public class DictionaryActivity extends AppCompatActivity {
     }
 
 
-    public void morphologicalStrcuture(String word){
 
-        morphText.setText(word);
-        Log.d("DICTLOG", "morphText : " + word);
-
-    }
 }

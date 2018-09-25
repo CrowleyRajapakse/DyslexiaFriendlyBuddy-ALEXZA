@@ -56,15 +56,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainServiceActivity" />
         <activity android:name=".TTS_SettingsActivity" />
-        <activity android:name=".DictionaryActivity"
-            android:label="@string/action_dictionary_label">
-            <intent-filter>
-                <action android:name="android.intent.action.PROCESS_TEXT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ChunkingActivity" />
+        <activity android:name=".DictionaryActivity" />
+        <activity android:name=".ChunkingActivity"
+
+            />
         <activity android:name=".MLActivity" />
         <activity android:name=".ChatBotActivity" />
         <activity android:name=".OcrOpenCV"></activity>
