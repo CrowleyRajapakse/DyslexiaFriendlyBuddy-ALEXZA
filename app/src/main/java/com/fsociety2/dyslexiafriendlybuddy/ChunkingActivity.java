@@ -46,19 +46,10 @@ public class ChunkingActivity extends AppCompatActivity {
     int newWordCount;
     int newfontcolor;
     int newbackcolor;
-
-
-
     EditText txtWordCount;
-
     TextView textPreview;
-
-    //String wordCase;
     String newfontstyle;
-    String caseText;
-
     List<String> FontStylesList = new ArrayList<String>();
-
     ColorPicker colorPickerB;
     ColorPicker colorPickerF;
 
@@ -71,7 +62,7 @@ public class ChunkingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_chunking);
 
-        SeekBar mySeekBar = (SeekBar) findViewById(R.id.chunkseekBar);
+        SeekBar mySeekBar = findViewById(R.id.chunkseekBar);
         mySeekBar.setOnSeekBarChangeListener(customSeekBarListener);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ChunkingActivity.this.getApplicationContext());
         int previousTextSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
@@ -259,8 +250,6 @@ public class ChunkingActivity extends AppCompatActivity {
         FontStylesList.add("Sansumi");
         FontStylesList.add("Walkway");
 
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ChunkingActivity.this
-//                , android.R.layout.simple_list_item_1, FontStylesList);
 
         CustomSpinnerAdapter arrayAdapter = new CustomSpinnerAdapter(ChunkingActivity.this, android.R.layout.simple_list_item_1, FontStylesList);
         fontspinner.setAdapter(arrayAdapter);
@@ -276,7 +265,7 @@ public class ChunkingActivity extends AppCompatActivity {
             }
 
             public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
+
 
             }
 

@@ -44,7 +44,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private float pitch;
     private float speed;
     private ImageView stop;
-    MotionEvent motionEvent;
+
 
     final String TAG = "LOGCATCHUNK";
     private int textSize;
@@ -52,13 +52,12 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private int fontcolor;
     private int backcolor;
     private String fontstyle;
-    String word;
+
 
     private TextView dataView;
 
     int currentPage;
     int pageCount;
-    int mOffset;
     String pages[];
     String words[];
     String textFromCam;
@@ -419,28 +418,28 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private void chunckText() {
         if (wordCount > 0) {
             words = textFromCam.split("\\W+");
-           // Log.d(TAG, "words length : " + words.length);
+            Log.d(TAG, "words length : " + words.length);
             pageCount = (int) Math.ceil(words.length / (wordCount * 1.0));
-           // Log.d(TAG, "Page count : " + pageCount);
-            //Log.d(TAG, "Word count : " + wordCount);
+            Log.d(TAG, "Page count : " + pageCount);
+            Log.d(TAG, "Word count : " + wordCount);
 
             pages = new String[pageCount];
-           // Log.d(TAG, "CHUNKING pages length : " + pages.length);
+            Log.d(TAG, "CHUNKING pages length : " + pages.length);
 
             for (int i = 0; i < pageCount; i++) {
                 String page = "";
-              //  Log.d(TAG, "CHUNKING init page : " + page);
+                Log.d(TAG, "CHUNKING init page : " + page);
                 for (int j = i * wordCount; j < i * wordCount + wordCount; j++) {
                     if (j < words.length) {
                         page = page.concat(words[j]);
                         page = page.concat(" ");
-                       // Log.d(TAG, "CHUNKING true word: " + words[j]);
-                     //   Log.d(TAG, "PAge : " + i + " Text : " + page);
+                        Log.d(TAG, "CHUNKING true word: " + words[j]);
+                        Log.d(TAG, "PAge : " + i + " Text : " + page);
                     } else
                         break;
                 }
                 pages[i] = page;
-               // Log.d(TAG, "CHUNKING page : " + pages[i]);
+                Log.d(TAG, "CHUNKING page : " + pages[i]);
             }
 
             currentPage = 0;

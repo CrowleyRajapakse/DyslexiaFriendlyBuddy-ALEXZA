@@ -22,7 +22,6 @@ import org.w3c.dom.Text;
 import java.io.InputStream;
 
 public class DictionaryActivity extends AppCompatActivity {
-    MediaStore.Audio audioFile;
     String urlx;
     String def;
     String morph;
@@ -30,8 +29,6 @@ public class DictionaryActivity extends AppCompatActivity {
     String data;
     EditText editText;
     ImageView exampleImage;
-
-    //  TextView textView3;
 
 
     TextView exampleText;
@@ -96,9 +93,7 @@ public class DictionaryActivity extends AppCompatActivity {
         defText.setText(def);
         addImage();
 
-
     }
-
 
     private String dictionaryEntries() {
         final String language = "en";

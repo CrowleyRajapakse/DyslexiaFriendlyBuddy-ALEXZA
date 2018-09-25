@@ -11,14 +11,14 @@ public class MorphologicalStructure
         System.out.println("1 " + word);
         int wordSize = word.length();
         char array[] = word.toCharArray();
-        String blop = "";
+        String finalOutput = "";
         List<String> a = new ArrayList<>();
         List<Integer> indexes = new ArrayList<>();
         int n = 0;
 
         for (int i = 0; i < array.length; i++) {
             if ((array[i] == 'a') | (array[i] == 'e') | (array[i] == 'i') | (array[i] == 'o') | (array[i] == 'u')) {
-                // int index=i;
+
                 indexes.add(i);
                 n = n + 1;
 
@@ -53,18 +53,18 @@ public class MorphologicalStructure
                 if (word.charAt(wordSize - 1) != newout.charAt(newout.length() - 1)) {
 
                     if (word.charAt(wordSize - 2) == newout.charAt(newout.length() - 1)) {
-                        blop = newout + "-" + word.charAt(wordSize - 1);
+                        finalOutput = newout + "-" + word.charAt(wordSize - 1);
                     } else if (word.charAt(wordSize - 3) == newout.charAt(newout.length() - 1)) {
-                        blop = newout + "-" + word.charAt(wordSize - 2) + "-" + word.charAt(wordSize - 1);
+                        finalOutput = newout + "-" + word.charAt(wordSize - 2) + "-" + word.charAt(wordSize - 1);
                     } else if (word.charAt(wordSize - 4) == newout.charAt(newout.length() - 1)) {
-                        blop = newout + "-" + word.charAt(wordSize - 3) + word.charAt(wordSize - 2) + word.charAt(wordSize - 1);
+                        finalOutput = newout + "-" + word.charAt(wordSize - 3) + word.charAt(wordSize - 2) + word.charAt(wordSize - 1);
                     }
                 } else
-                    blop = newout;
-                return blop;
+                    finalOutput = newout;
+                return finalOutput;
             } else {
-                blop = word;
-                return blop;
+                finalOutput = word;
+                return finalOutput;
             }
 
         }
