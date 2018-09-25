@@ -145,8 +145,6 @@
                     android:layout_marginEnd="10sp"/>
 
 
-
-
                 <TextView
                     android:id="@+id/text6"
                     android:layout_width="wrap_content"
@@ -155,9 +153,6 @@
                     android:text="Morphological Notation:"
                     android:textStyle="bold"
                     android:textSize="20sp" />
-
-
-
 
             <TextView
                 android:id="@+id/morphText"
@@ -194,27 +189,22 @@
                 android:layout_marginStart="10sp"
                 android:layout_marginEnd="10sp"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/Image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:gravity="center_vertical">
+                android:text="Example Image:"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
 
                 <ImageView
-                    android:id="@+id/exampleImage1"
+                    android:id="@+id/exampleImage"
+                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/ic_image_black_24dp" />
-
-                <ImageView
-                    android:id="@+id/exampleImage2"
-                    android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/ic_image_black_24dp" />
-            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

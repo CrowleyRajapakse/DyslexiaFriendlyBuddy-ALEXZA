@@ -40,6 +40,7 @@ public class ChunkingActivity extends AppCompatActivity {
     final static String EXTRA_FONT_COLOR = "fontcolor";
     final static String EXTRA_BACK_COLOR = "backcolor";
     final static String TAG = "CHUNKINGLOG";
+
     SharedPreferences sharedPreferences;
     int newTextSize;
     int newWordCount;
@@ -47,11 +48,12 @@ public class ChunkingActivity extends AppCompatActivity {
     int newbackcolor;
 
 
+
     EditText txtWordCount;
 
     TextView textPreview;
 
-    String wordCase;
+    //String wordCase;
     String newfontstyle;
     String caseText;
 
@@ -60,8 +62,7 @@ public class ChunkingActivity extends AppCompatActivity {
     ColorPicker colorPickerB;
     ColorPicker colorPickerF;
 
-    RadioGroup radioCaseGroup;
-    RadioButton radioCaseButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +80,15 @@ public class ChunkingActivity extends AppCompatActivity {
         final int previousFontColor = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_COLOR, 0xFF0000);
         final int previousBackColor = sharedPreferences.getInt(ChunkingActivity.EXTRA_BACK_COLOR, 0xFFFF00);
 
+
+
         mySeekBar.setProgress(previousTextSize);
         Spinner fontspinner = findViewById(R.id.fontspinner);
         Button changebackground = findViewById(R.id.colorbutton);
         Button changefontcolor = findViewById(R.id.fontcolorbutton);
         ImageView backbutton = findViewById(R.id.backbutton);
+
+
 
         txtWordCount = findViewById(R.id.wordcountinput);
         textPreview = findViewById(R.id.textPreview);
@@ -100,6 +105,7 @@ public class ChunkingActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
 
 
         changebackground.setOnClickListener(new View.OnClickListener() {
@@ -152,8 +158,6 @@ public class ChunkingActivity extends AppCompatActivity {
                                 newbackcolor = color;
                                 updateBackgroundColor(newbackcolor);
                                 textPreview.setBackgroundColor(newbackcolor);
-
-
                             }
 
                             @Override
@@ -284,6 +288,8 @@ public class ChunkingActivity extends AppCompatActivity {
         updateFontColor(previousFontColor);
 
 
+
+
         ImageView btnSave = findViewById(R.id.savebutton);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -298,9 +304,6 @@ public class ChunkingActivity extends AppCompatActivity {
                 editor.apply();
             }
         });
-
-
-
 
 
     }
@@ -346,6 +349,7 @@ public class ChunkingActivity extends AppCompatActivity {
         newbackcolor = newbcolor;
 
     }
+
 
 
 }
