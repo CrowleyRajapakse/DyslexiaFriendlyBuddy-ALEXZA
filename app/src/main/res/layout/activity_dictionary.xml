@@ -93,7 +93,6 @@
                     android:layout_marginTop="1dp"
                     android:padding="10dp"
                     android:background="@drawable/circlebackgroundyellow"
-                    android:onClick="requestApiButtonClick"
                     android:src="@drawable/ic_format_align_left_black_24dp"
                     />
 
