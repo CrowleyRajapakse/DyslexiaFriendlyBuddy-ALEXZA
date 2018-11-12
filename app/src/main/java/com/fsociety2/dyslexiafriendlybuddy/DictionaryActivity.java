@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -38,7 +39,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
     TextView phoneticText;
     TextView morphText;
     TextView defText;
-    ImageView ivHardWord;
+    Button ivHardWord;
 
     ImageView listenDef, listenExample, listenWord;
     TextToSpeech tts;
@@ -197,6 +198,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
         if (id == 0) {
             id = getResources().getIdentifier("noimage",
                     "raw", getPackageName());
+
         }
 
         InputStream imageStream = this.getResources().openRawResource(id);

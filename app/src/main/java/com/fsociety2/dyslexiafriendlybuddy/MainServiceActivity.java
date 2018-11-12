@@ -417,7 +417,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
     private void chunckText() {
         if (wordCount > 0) {
-            words = textFromCam.split("\\W+");
+            words = textFromCam.split("\\s");
             Log.d(TAG, "words length : " + words.length);
             pageCount = (int) Math.ceil(words.length / (wordCount * 1.0));
             Log.d(TAG, "Page count : " + pageCount);

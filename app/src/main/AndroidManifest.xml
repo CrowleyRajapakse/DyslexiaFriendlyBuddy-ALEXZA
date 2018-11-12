@@ -56,7 +56,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainServiceActivity" />
         <activity android:name=".TTS_SettingsActivity" />
-        <activity android:name=".DictionaryActivity"
+
+        <activity
+            android:name=".DictionaryActivity"
             android:label="@string/action_dictionary_label">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
@@ -64,6 +66,8 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
+
         <activity android:name=".ChunkingActivity"
 
             />

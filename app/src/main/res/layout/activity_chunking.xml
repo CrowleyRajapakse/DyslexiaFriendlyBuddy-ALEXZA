@@ -12,20 +12,22 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:text="Chunk and Text Formatting"/>
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarch"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Chunk and Text Formatting"/>
-
 
     </android.support.design.widget.AppBarLayout>
     <ScrollView

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,20 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:text="ALEXZA Dictionary"/>
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarch"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:text="Chunk and Text Formatting"/>
-
 
     </android.support.design.widget.AppBarLayout>
 
@@ -40,16 +44,6 @@
             android:focusableInTouchMode="true">
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:textSize="30sp"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:text="DICTIONARY"
-                />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,11 +56,12 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:layout_marginStart="10sp"
                     android:hint="Enter the word"
                     android:inputType="text" />
 
                 <View
-                    android:layout_width="20dp"
+                    android:layout_width="10dp"
                     android:layout_height="1dp" />
 
                 <ImageView
@@ -82,22 +77,12 @@
                     />
 
                 <View
-                    android:layout_width="20dp"
+                    android:layout_width="10dp"
                     android:layout_height="1dp" />
 
-                <ImageView
-                    android:id="@+id/ivHardWord"
-                    android:layout_width="52dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="1dp"
-                    android:padding="10dp"
-                    android:background="@drawable/circlebackgroundyellow"
-                    android:onClick="requestApiButtonClick"
-                    android:src="@drawable/ic_format_align_left_black_24dp"
-                    />
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,6 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Pronounciation : "
+                    android:layout_marginStart="10sp"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
 
@@ -132,8 +118,9 @@
                     android:id="@+id/text3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/definition"
+                    android:text="Definition : "
                     android:textSize="20sp"
+                    android:layout_marginStart="10sp"
                     android:textStyle="bold"/>
 
                 <ImageView
@@ -164,6 +151,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/phonotic_notation"
+                android:layout_marginStart="10sp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
                 android:textSize="20sp" />
@@ -187,6 +175,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Morphological Notation:"
                 android:textStyle="bold"
+                android:layout_marginStart="10sp"
                 android:textSize="20sp" />
 
             <TextView
@@ -213,6 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Example : "
+                    android:layout_marginStart="10sp"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
                 <ImageView
@@ -243,15 +233,45 @@
                 android:layout_marginTop="20dp"
                 android:text="Example Image:"
                 android:textSize="20sp"
+                android:layout_marginStart="10sp"
                 android:textStyle="bold"/>
 
             <ImageView
                 android:id="@+id/exampleImage"
                 android:layout_width="wrap_content"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/ic_image_black_24dp"
                 android:scaleType="centerInside"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginBottom="20dp"
                 android:adjustViewBounds="true"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:id="@+id/ivHardWord"
+                    android:layout_width="52dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_style"
+                    android:textSize="13sp"
+                    android:onClick="requestApiButtonClick"
+                    android:text="Save hard word"
+
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="30dp" />
 
         </LinearLayout>
     </ScrollView>
