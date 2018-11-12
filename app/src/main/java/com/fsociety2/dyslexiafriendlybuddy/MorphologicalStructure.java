@@ -1,73 +1,88 @@
 package com.fsociety2.dyslexiafriendlybuddy;
+
 import java.util.List;
 import java.util.ArrayList;
 
-public class MorphologicalStructure
-{
+public class MorphologicalStructure {
     public static String Morphlogical(String text) {
-
 
         String word = text.trim();
         System.out.println("1 " + word);
         int wordSize = word.length();
-        char array[] = word.toCharArray();
+        char splitArray[] = word.toCharArray();
         String finalOutput = "";
-        List<String> a = new ArrayList<>();
+        List<String> middleArray = new ArrayList<>();
         List<Integer> indexes = new ArrayList<>();
-        int n = 0;
+        String newOutput = "";
+        int incrementCount = 0;
 
-        for (int i = 0; i < array.length; i++) {
-            if ((array[i] == 'a') | (array[i] == 'e') | (array[i] == 'i') | (array[i] == 'o') | (array[i] == 'u')) {
+        for (int i = 0; i < splitArray.length; i++) {
+            if ((splitArray[i] == 'a') | (splitArray[i] == 'e') | (splitArray[i] == 'i') | (splitArray[i] == 'o') | (splitArray[i] == 'u')) {
 
                 indexes.add(i);
-                n = n + 1;
-
+                incrementCount = incrementCount + 1;
                 System.out.println("2: " + i);
-                System.out.println(array[i]);
+                System.out.println(splitArray[i]);
 
 
             }
         }
-            if (indexes.size() != 0) {
-                int[] inarray = new int[indexes.size()];
-                int start = 0;
-                for (int i = 0; i < indexes.size(); i++) {
+        if (indexes.size() != 0) {
+            int[] insideArray = new int[indexes.size()];
+            int start = 0;
+            for (int i = 0; i < indexes.size(); i++) {
 
-                    inarray[i] = indexes.get(i);
-                    String sub = word.substring(start, inarray[i] + 1);
-                    a.add(sub + "-");
-                    start = inarray[i] + 1;
+                insideArray[i] = indexes.get(i);
+                String sub = word.substring(start, insideArray[i] + 1);
+                middleArray.add(sub + "-");
+                start = insideArray[i] + 1;
+            }
+
+            String[] x = middleArray.toArray(new String[middleArray.size()]);
+            String output = "";
+            for (String str : x)
+                output = output + str;
+            int outLength = output.length();
+            System.out.println(output);
+            System.out.println(outLength);
+
+            if (output.charAt(outLength - 1) == '-') {
+                newOutput = output.substring(0, outLength - 1);
+                System.out.println("new: " + newOutput);
+
+
+                if (word.charAt(wordSize - 1) != newOutput.charAt(newOutput.length() - 1)) {
+
+                    if (word.charAt(wordSize - 2) == newOutput.charAt(newOutput.length() - 1)) {
+                        finalOutput = newOutput + "-" + word.charAt(wordSize - 1);
+
+                    } else if (word.charAt(wordSize - 3) == newOutput.charAt(newOutput.length() - 1))
+
+                    {
+                        finalOutput = newOutput + "-" + word.charAt(wordSize - 2) + word.charAt(wordSize - 1);
+                    } else if (word.charAt(wordSize - 4) == newOutput.charAt(newOutput.length() - 1)) {
+                        finalOutput = newOutput + "-" + word.charAt(wordSize - 3) + word.charAt(wordSize - 2) + word.charAt(wordSize - 1);
+                    } else if (word.charAt(wordSize - 5) == newOutput.charAt(newOutput.length() - 1)) {
+                        finalOutput = newOutput + "-" + word.charAt(wordSize - 4) + word.charAt(wordSize - 3) + word.charAt(wordSize - 2) + word.charAt(wordSize - 1);
+                    }
+
+                    System.out.println("finalOutput: " + finalOutput);
+                    return finalOutput;
+                } else {
+                    finalOutput = newOutput;
+                    return finalOutput;
+
                 }
 
-                String[] x = a.toArray(new String[a.size()]);
-                String output = "";
-                for (String str : x)
-                    output = output + str;
-                int num = output.length();
-                System.out.println(num);
-
-                if (output.charAt(num - 1) == '-') ;
-                String newout = output.substring(0, num - 1);
-
-
-                if (word.charAt(wordSize - 1) != newout.charAt(newout.length() - 1)) {
-
-                    if (word.charAt(wordSize - 2) == newout.charAt(newout.length() - 1)) {
-                        finalOutput = newout + "-" + word.charAt(wordSize - 1);
-                    } else if (word.charAt(wordSize - 3) == newout.charAt(newout.length() - 1)) {
-                        finalOutput = newout + "-" + word.charAt(wordSize - 2) + "-" + word.charAt(wordSize - 1);
-                    } else if (word.charAt(wordSize - 4) == newout.charAt(newout.length() - 1)) {
-                        finalOutput = newout + "-" + word.charAt(wordSize - 3) + word.charAt(wordSize - 2) + word.charAt(wordSize - 1);
-                    }
-                } else
-                    finalOutput = newout;
-                return finalOutput;
-            } else {
-                finalOutput = word;
-                return finalOutput;
             }
 
+        } else {
+            finalOutput = word;
+            return finalOutput;
+
         }
+        return finalOutput;
     }
+}
 
 

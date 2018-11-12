@@ -44,15 +44,19 @@ public class ChunkingActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     int newTextSize;
     int newWordCount;
-    int newfontcolor;
-    int newbackcolor;
-    EditText txtWordCount;
-    TextView textPreview;
-    String newfontstyle;
-    List<String> FontStylesList = new ArrayList<String>();
-    ColorPicker colorPickerB;
-    ColorPicker colorPickerF;
+    int newFontColor;
+    int newBackColor;
 
+    EditText textWordCount;
+
+    TextView textPreview;
+
+    String newFontStyle;
+
+    List<String> FontStylesList = new ArrayList<String>();
+
+    ColorPicker colorPickerBack;
+    ColorPicker colorPickerFont;
 
 
     @Override
@@ -62,7 +66,7 @@ public class ChunkingActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_chunking);
 
-        SeekBar mySeekBar = findViewById(R.id.chunkseekBar);
+        SeekBar mySeekBar = findViewById(R.id.chunkSeekBar);
         mySeekBar.setOnSeekBarChangeListener(customSeekBarListener);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ChunkingActivity.this.getApplicationContext());
         int previousTextSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 10);
@@ -72,25 +76,23 @@ public class ChunkingActivity extends AppCompatActivity {
         final int previousBackColor = sharedPreferences.getInt(ChunkingActivity.EXTRA_BACK_COLOR, 0xFFFF00);
 
 
-
         mySeekBar.setProgress(previousTextSize);
-        Spinner fontspinner = findViewById(R.id.fontspinner);
-        Button changebackground = findViewById(R.id.colorbutton);
-        Button changefontcolor = findViewById(R.id.fontcolorbutton);
-        ImageView backbutton = findViewById(R.id.backbutton);
+        Spinner fontSpinner = findViewById(R.id.fontSpinner);
+        Button changeBackground = findViewById(R.id.backColorButton);
+        Button changeFontColor = findViewById(R.id.fontColorButton);
+        ImageView backButton = findViewById(R.id.backButton);
 
 
-
-        txtWordCount = findViewById(R.id.wordcountinput);
+        textWordCount = findViewById(R.id.wordCountInput);
         textPreview = findViewById(R.id.textPreview);
-        txtWordCount.setText(String.valueOf(previousWordCount));
+        textWordCount.setText(String.valueOf(previousWordCount));
 
         textPreview.setBackgroundColor(previousBackColor);
         textPreview.setTextColor(previousFontColor);
         textPreview.setTextSize(TypedValue.COMPLEX_UNIT_SP, previousTextSize);
         textPreview.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/" + previousFontStyle + ".ttf"));
 
-        backbutton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -98,11 +100,10 @@ public class ChunkingActivity extends AppCompatActivity {
         });
 
 
-
-        changebackground.setOnClickListener(new View.OnClickListener() {
+        changeBackground.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                colorPickerB = new ColorPicker(ChunkingActivity.this);
+                colorPickerBack = new ColorPicker(ChunkingActivity.this);
                 ArrayList<String> colors = new ArrayList<>();
                 colors.add("#F5A9A9");
                 colors.add("#F78181");
@@ -136,7 +137,7 @@ public class ChunkingActivity extends AppCompatActivity {
                 colors.add("#FFFFFF");
 
 
-                colorPickerB
+                colorPickerBack
                         .setDefaultColorButton(previousBackColor)
                         .setColors(colors)
                         .setColumns(5)
@@ -145,15 +146,15 @@ public class ChunkingActivity extends AppCompatActivity {
 
                             @Override
                             public void onChooseColor(int position, int color) {
-                                colorPickerB.setDefaultColorButton(previousBackColor);
-                                newbackcolor = color;
-                                updateBackgroundColor(newbackcolor);
-                                textPreview.setBackgroundColor(newbackcolor);
+                                colorPickerBack.setDefaultColorButton(previousBackColor);
+                                newBackColor = color;
+                                updateBackgroundColor(newBackColor);
+                                textPreview.setBackgroundColor(newBackColor);
                             }
 
                             @Override
                             public void onCancel() {
-                                colorPickerB.setDefaultColorButton(previousBackColor);
+                                colorPickerBack.setDefaultColorButton(previousBackColor);
                                 updateBackgroundColor(previousBackColor);
                             }
 
@@ -163,10 +164,10 @@ public class ChunkingActivity extends AppCompatActivity {
         });
 
 
-        changefontcolor.setOnClickListener(new View.OnClickListener() {
+        changeFontColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                colorPickerF = new ColorPicker(ChunkingActivity.this);
+                colorPickerFont = new ColorPicker(ChunkingActivity.this);
                 ArrayList<String> colors = new ArrayList<>();
                 colors.add("#F39C12");
                 colors.add("#EA6604");
@@ -200,7 +201,7 @@ public class ChunkingActivity extends AppCompatActivity {
                 colors.add("#424242");
                 colors.add("#000000");
 
-                colorPickerF
+                colorPickerFont
                         .setDefaultColorButton(previousFontColor)
                         .setColors(colors)
                         .setColumns(5)
@@ -209,17 +210,17 @@ public class ChunkingActivity extends AppCompatActivity {
 
                             @Override
                             public void onChooseColor(int position, int color) {
-                                colorPickerF.setDefaultColorButton(previousFontColor);
-                                newfontcolor = color;
-                                updateFontColor(newfontcolor);
-                                textPreview.setTextColor(newfontcolor);
+                                colorPickerFont.setDefaultColorButton(previousFontColor);
+                                newFontColor = color;
+                                updateFontColor(newFontColor);
+                                textPreview.setTextColor(newFontColor);
 
 
                             }
 
                             @Override
                             public void onCancel() {
-                                colorPickerF.setDefaultColorButton(previousFontColor);
+                                colorPickerFont.setDefaultColorButton(previousFontColor);
                                 updateFontColor(previousFontColor);
                             }
 
@@ -252,15 +253,15 @@ public class ChunkingActivity extends AppCompatActivity {
 
 
         CustomSpinnerAdapter arrayAdapter = new CustomSpinnerAdapter(ChunkingActivity.this, android.R.layout.simple_list_item_1, FontStylesList);
-        fontspinner.setAdapter(arrayAdapter);
+        fontSpinner.setAdapter(arrayAdapter);
         int spinnerPosition1 = arrayAdapter.getPosition(previousFontStyle);
-        fontspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        fontSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> adapterView,
                                        View view, int i, long l) {
-                newfontstyle = FontStylesList.get(i);
-                updateFontStyle(newfontstyle);
-                textPreview.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/" + newfontstyle + ".ttf"));
+                newFontStyle = FontStylesList.get(i);
+                updateFontStyle(newFontStyle);
+                textPreview.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/" + newFontStyle + ".ttf"));
 
             }
 
@@ -272,24 +273,22 @@ public class ChunkingActivity extends AppCompatActivity {
         });
 
 
-        fontspinner.setSelection(spinnerPosition1);
+        fontSpinner.setSelection(spinnerPosition1);
         updateBackgroundColor(previousBackColor);
         updateFontColor(previousFontColor);
 
 
-
-
-        ImageView btnSave = findViewById(R.id.savebutton);
+        ImageView btnSave = findViewById(R.id.saveButton);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                newWordCount = Integer.parseInt(txtWordCount.getText().toString());
+                newWordCount = Integer.parseInt(textWordCount.getText().toString());
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putInt(EXTRA_FONT_SIZE, newTextSize);
                 editor.putInt(EXTRA_WORD_COUNT, newWordCount);
-                editor.putString(EXTRA_FONT_STYLE, newfontstyle);
-                editor.putInt(EXTRA_BACK_COLOR, newbackcolor);
-                editor.putInt(EXTRA_FONT_COLOR, newfontcolor);
+                editor.putString(EXTRA_FONT_STYLE, newFontStyle);
+                editor.putInt(EXTRA_BACK_COLOR, newBackColor);
+                editor.putInt(EXTRA_FONT_COLOR, newFontColor);
                 editor.apply();
             }
         });
@@ -325,20 +324,19 @@ public class ChunkingActivity extends AppCompatActivity {
     }
 
     private void updateFontStyle(String newfstyle) {
-        newfontstyle = newfstyle;
+        newFontStyle = newfstyle;
 
     }
 
 
     private void updateFontColor(int newfcolor) {
-        newfontcolor = newfcolor;
+        newFontColor = newfcolor;
     }
 
     private void updateBackgroundColor(int newbcolor) {
-        newbackcolor = newbcolor;
+        newBackColor = newbcolor;
 
     }
-
 
 
 }

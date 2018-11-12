@@ -49,11 +49,9 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     final String TAG = "LOGCATCHUNK";
     private int textSize;
     private int wordCount;
-    private int fontcolor;
-    private int backcolor;
-    private String fontstyle;
-
-
+    private int fontColor;
+    private int backColor;
+    private String fontStyle;
     private TextView dataView;
 
     int currentPage;
@@ -62,7 +60,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     String words[];
     String textFromCam;
     private ImageView btnNextPage;
-    private ImageView button2;
+    private ImageView chunkInterface;
 
     private Activity activity;
     private Button btnMl;
@@ -80,10 +78,12 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
 
         dataView = findViewById(R.id.textData);
-        btnNextPage = findViewById(R.id.nextchunk);
+        btnNextPage = findViewById(R.id.nextChunk);
+
+
         listen = findViewById(R.id.btn_play);
         stop = findViewById(R.id.btn_stop);
-        button2 = findViewById(R.id.tochunkinterface);
+        chunkInterface = findViewById(R.id.toChunkInterface);
         btnMl = findViewById(R.id.btn_hw);
         ttsSettingBtn = findViewById(R.id.tts_settings);
         backwardBtn = findViewById(R.id.backward);
@@ -92,9 +92,9 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainServiceActivity.this.getApplicationContext());
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 100);
         wordCount = sharedPreferences.getInt(ChunkingActivity.EXTRA_WORD_COUNT, 0);
-        fontstyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "Aller");
-        fontcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_COLOR, 0xFF0000);
-        backcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_BACK_COLOR, 0xFFFF00);
+        fontStyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "Aller");
+        fontColor = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_COLOR, 0xFF0000);
+        backColor = sharedPreferences.getInt(ChunkingActivity.EXTRA_BACK_COLOR, 0xFFFF00);
 
 
         textFromCam = getIntent().getExtras().getString("data");
@@ -110,7 +110,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
         String[] dataArr = textFromCam.split(" ");
 
-        ImageView button2 = findViewById(R.id.tochunkinterface);
+        ImageView button2 = findViewById(R.id.toChunkInterface);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -323,13 +323,13 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         super.onResume();
         textSize = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_SIZE, 100);
         wordCount = sharedPreferences.getInt(ChunkingActivity.EXTRA_WORD_COUNT, 0);
-        fontstyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "Aller");
-        fontcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_COLOR, 0xFF0000);
-        backcolor = sharedPreferences.getInt(ChunkingActivity.EXTRA_BACK_COLOR, 0xFFFF00);
+        fontStyle = sharedPreferences.getString(ChunkingActivity.EXTRA_FONT_STYLE, "Aller");
+        fontColor = sharedPreferences.getInt(ChunkingActivity.EXTRA_FONT_COLOR, 0xFF0000);
+        backColor = sharedPreferences.getInt(ChunkingActivity.EXTRA_BACK_COLOR, 0xFFFF00);
 
-        Log.d(TAG, "style : " + fontstyle);
+        Log.d(TAG, "style : " + fontStyle);
 
-        switch (fontstyle) {
+        switch (fontStyle) {
 
             case "Aller":
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Aller.ttf"));
@@ -384,8 +384,8 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
                 dataView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Aller.ttf"));
                 break;
         }
-        dataView.setTextColor(fontcolor);
-        dataView.setBackgroundColor(backcolor);
+        dataView.setTextColor(fontColor);
+        dataView.setBackgroundColor(backColor);
 
 
         Log.d(TAG, "Word count : " + wordCount);

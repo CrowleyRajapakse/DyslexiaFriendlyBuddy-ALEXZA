@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     android:orientation="vertical"
     tools:context=".DictionaryActivity">
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarch"
         android:layout_width="match_parent"
@@ -17,18 +17,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="6dp"
+            android:text="ALEXZA Dictionary"
             android:textColor="#ffffff"
-            android:text="ALEXZA Dictionary"/>
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarch"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"/>
+            android:background="?attr/colorPrimary" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -39,24 +39,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="20dp"
-            android:focusableInTouchMode="true">
+            android:layout_margin="15dp"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/dictionary_border_style"
+                >
 
                 <EditText
-                    android:id="@+id/editText"
-                    android:layout_width="0dp"
+                    android:id="@+id/enteredWord"
+                    android:layout_width="265dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="10sp"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:layout_marginStart="10sp"
                     android:hint="Enter the word"
                     android:inputType="text" />
 
@@ -65,9 +67,9 @@
                     android:layout_height="1dp" />
 
                 <ImageView
-                    android:id="@+id/searchbutton"
+                    android:id="@+id/searchButton"
                     android:layout_width="52dp"
-                    android:layout_height="50dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="1dp"
                     android:background="@drawable/circlebackgroundyellow"
@@ -87,20 +89,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/pronounce"
+                    android:id="@+id/pronounciation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pronounciation : "
                     android:layout_marginStart="10sp"
+                    android:text="Pronounciation : "
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/pronouncesound"
+                    android:id="@+id/pronounceSound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_volume_up_black_24dp" />
@@ -110,21 +112,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical">
 
 
                 <TextView
-                    android:id="@+id/text3"
+                    android:id="@+id/wordDefinition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10sp"
                     android:text="Definition : "
                     android:textSize="20sp"
-                    android:layout_marginStart="10sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/defsound"
+                    android:id="@+id/defSound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_volume_up_black_24dp" />
@@ -135,117 +137,118 @@
                 android:id="@+id/defText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10sp"
                 android:layout_marginEnd="10sp"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="20dp"
+                android:background="#E8E8E8"
                 android:ems="10"
                 android:textColor="#000000"
-                android:textSize="17sp"
-                android:background="#E8E8E8"/>
+                android:textSize="17sp" />
 
             >
 
             <TextView
-                android:id="@+id/text4"
+                android:id="@+id/wordPhonetic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:text="@string/phonotic_notation"
-                android:layout_marginStart="10sp"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/phoneticText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="30sp"
-                android:layout_marginTop="20dp"
-                android:textColor="#000000"
-                android:background="#E8E8E8"
+                android:layout_marginEnd="10sp"
                 android:layout_marginStart="10sp"
-                android:layout_marginEnd="10sp"/>
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="#E8E8E8"
+                android:textColor="#000000"
+                android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/text6"
+                android:id="@+id/wordMorphologic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
                 android:layout_marginTop="20dp"
                 android:text="Morphological Notation:"
-                android:textStyle="bold"
-                android:layout_marginStart="10sp"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/morphText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="20dp"
-                android:textSize="30sp"
-                android:textColor="#000000"
-                android:ems="10"
-                android:background="#E8E8E8"
+                android:layout_marginEnd="10sp"
                 android:layout_marginStart="10sp"
-                android:layout_marginEnd="10sp"/>
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:background="#E8E8E8"
+                android:ems="10"
+                android:textColor="#000000"
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/text5"
+                    android:id="@+id/wordExample"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Example : "
                     android:layout_marginStart="10sp"
+                    android:text="Example : "
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <ImageView
-                    android:id="@+id/Examplesound"
+                    android:id="@+id/exampleSound"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_volume_up_black_24dp" />
 
-        </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/exampleText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10sp"
+                android:layout_marginStart="10sp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:textSize="17sp"
-                android:textColor="#000000"
-                android:ems="10"
                 android:background="#E8E8E8"
-                android:layout_marginStart="10sp"
-                android:layout_marginEnd="10sp"/>
+                android:ems="10"
+                android:textColor="#000000"
+                android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/Image"
+                android:id="@+id/exampleImageTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
                 android:layout_marginTop="20dp"
                 android:text="Example Image:"
                 android:textSize="20sp"
-                android:layout_marginStart="10sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/exampleImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_image_black_24dp"
-                android:scaleType="centerInside"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10sp"
                 android:layout_marginBottom="20dp"
-                android:adjustViewBounds="true"/>
+                android:layout_marginStart="10sp"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_image_black_24dp" />
 
 
             <LinearLayout
@@ -258,13 +261,13 @@
                     android:layout_width="52dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_style"
-                    android:textSize="13sp"
                     android:onClick="requestApiButtonClick"
                     android:text="Save hard word"
+                    android:textSize="13sp"
 
                     />
             </LinearLayout>

@@ -110,7 +110,7 @@
             app:srcCompat="@drawable/ic_stop_black_24dp" />
 
         <ImageView
-            android:id="@+id/nextchunk"
+            android:id="@+id/nextChunk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/circlebackgroundyellow"
@@ -125,7 +125,7 @@
             android:layout_width="10dp"
             android:layout_height="1dp" />
         <ImageView
-            android:id="@+id/tochunkinterface"
+            android:id="@+id/toChunkInterface"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/circlebackgroundyellow"

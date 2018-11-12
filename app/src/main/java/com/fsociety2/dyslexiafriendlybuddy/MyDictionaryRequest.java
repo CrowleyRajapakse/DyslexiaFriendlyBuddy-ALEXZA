@@ -24,29 +24,28 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
 
     final String app_id = "52b34dcb";
     final String app_key = "e5f510fa088c57d3cad7f1af28abe345";
-    String myurl;
-    String def;
+    String myUrl;
+    String definition;
     String example;
-    String phonetic;
+    String phoneticNotation;
     Context context;
-    TextView textView3;
+    TextView defText;
     TextView exampleText;
     TextView phoneticText;
 
 
-    MyDictionaryRequest(Context context, TextView textView3, TextView exampleText, TextView phoneticText) {
+    MyDictionaryRequest(Context context, TextView defText, TextView exampleText, TextView phoneticText) {
         this.context = context;
-        this.textView3 = textView3;
+        this.defText = defText;
         this.exampleText = exampleText;
         this.phoneticText = phoneticText;
     }
 
-
     @Override
     protected String doInBackground(String... voids) {
-        myurl = voids[0];
+        myUrl = voids[0];
         try {
-            URL url = new URL(myurl);
+            URL url = new URL(myUrl);
 
             HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
             urlConnection.setRequestProperty("Accept", "application/json");
@@ -79,38 +78,38 @@ public class MyDictionaryRequest extends AsyncTask<String, Integer, String> {
             JSONObject js = new JSONObject(result);
             JSONArray results = js.getJSONArray("results");
 
-            JSONObject lEntries = results.getJSONObject(0);
-            JSONArray laArray = lEntries.getJSONArray("lexicalEntries");
+            JSONObject lexEntries = results.getJSONObject(0);
+            JSONArray lexArray = lexEntries.getJSONArray("lexicalEntries");
 
-            JSONObject entries = laArray.getJSONObject(0);
-            JSONArray e = entries.getJSONArray("entries");
+            JSONObject entries = lexArray.getJSONObject(0);
+            JSONArray entryRows = entries.getJSONArray("entries");
 
-            JSONObject jsonObject = e.getJSONObject(0);
+            JSONObject jsonObject = entryRows.getJSONObject(0);
             JSONArray sensesArray = jsonObject.getJSONArray("senses");
 
             JSONObject d = sensesArray.getJSONObject(0);
-            JSONArray de = d.getJSONArray("definitions");
+            JSONArray defineWord = d.getJSONArray("definitions");
 
-            def = de.getString(0);
-            textView3.setText(def);
+            definition = defineWord.getString(0);
+            defText.setText(definition);
 
             JSONObject exes = sensesArray.getJSONObject(0);
             JSONArray examples = exes.getJSONArray("examples");
 
-            JSONObject xx = examples.getJSONObject(0);
-            example = xx.getString("text");
+            JSONObject exampleValue = examples.getJSONObject(0);
+            example = exampleValue.getString("text");
             exampleText.setText(example);
 
-            JSONObject pronounciations = laArray.getJSONObject(0);
+            JSONObject pronounciations = lexArray.getJSONObject(0);
             JSONArray pronounce = pronounciations.getJSONArray("pronunciations");
 
 
-            JSONObject pp = pronounce.getJSONObject(0);
-            phonetic= pp.optString("phoneticSpelling");
+            JSONObject notations = pronounce.getJSONObject(0);
+            phoneticNotation = notations.optString("phoneticSpelling");
 
-            phoneticText.setText(phonetic);
-            Log.d("DICTLOG", "PhoText : " + pp);
-            Log.d("DICTLOG", "PhoText : " + phonetic);
+            phoneticText.setText(phoneticNotation);
+            Log.d("DICTLOG", "PhoText : " + notations);
+            Log.d("DICTLOG", "PhoText : " + phoneticNotation);
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     android:orientation="vertical"
     tools:context=".ChunkingActivity">
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbarch"
         android:layout_width="match_parent"
@@ -16,20 +16,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:text="Chunk and Text Formatting"
             android:textColor="#ffffff"
-            android:text="Chunk and Text Formatting"/>
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbarch"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"/>
+            android:background="?attr/colorPrimary" />
 
     </android.support.design.widget.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -37,20 +38,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:text="Chunk Settings:"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="Chunk Settings:" />
+                android:textStyle="bold" />
             />
 
             <LinearLayout
@@ -58,14 +59,14 @@
                 android:layout_height="40dp">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/wordCountView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/word_count" />
 
                 <EditText
-                    android:id="@+id/wordcountinput"
+                    android:id="@+id/wordCountInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -76,14 +77,14 @@
             </LinearLayout>
 
 
-        <TextView
+            <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:text="Color Settings:"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="Color Settings:" />
+                android:textStyle="bold" />
             />
 
             <LinearLayout
@@ -91,20 +92,20 @@
                 android:layout_height="wrap_content"
                 android:gravity="center">
 
-            <Button
-                android:id="@+id/fontcolorbutton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_style"
-                android:textSize="13sp"
-                android:text="Font color"
+                <Button
+                    android:id="@+id/fontColorButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_style"
+                    android:text="Font color"
+                    android:textSize="13sp"
 
 
-                />
+                    />
 
 
                 <View
@@ -112,28 +113,28 @@
                     android:layout_height="1dp" />
 
                 <Button
-                    android:id="@+id/colorbutton"
+                    android:id="@+id/backColorButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Background color"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/button_style"
+                    android:text="Background color"
                     android:textSize="13sp"
 
-                  />
+                    />
 
-        </LinearLayout>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textPreview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="This is your text" />
 
@@ -142,74 +143,75 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:text="Font Settings:"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="Font Settings:" />
+                android:textStyle="bold" />
             />
 
             <TextView
-                android:id="@+id/text4"
+                android:id="@+id/fontSizeTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Font Size:" />
 
             <SeekBar
-                android:id="@+id/chunkseekBar"
+                android:id="@+id/chunkSeekBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:max="150"
                 android:progress="20" />
+
             <View
                 android:layout_width="20dp"
                 android:layout_height="1dp" />
+
             <TextView
-                android:id="@+id/text5"
+                android:id="@+id/fontStyleTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:text="Font Style:" />
 
             <Spinner
-                android:id="@+id/fontspinner"
+                android:id="@+id/fontSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:prompt="@string/font_prompt"
-                />
+                android:prompt="@string/font_prompt" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
 
-            <ImageView
-                android:id="@+id/savebutton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/circlebackgroundyellow"
-                android:padding="10dp"
-                android:src="@drawable/ic_save_black_24dp" />
+                <ImageView
+                    android:id="@+id/saveButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circlebackgroundyellow"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_save_black_24dp" />
 
-            <View
-                android:layout_width="20dp"
-                android:layout_height="1dp" />
+                <View
+                    android:layout_width="20dp"
+                    android:layout_height="1dp" />
 
-            <ImageView
-                android:id="@+id/backbutton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/circlebackgroundyellow"
-                android:padding="10dp"
-                android:src="@drawable/ic_arrow_back_black_24dp" />
-        </LinearLayout>
+                <ImageView
+                    android:id="@+id/backButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/circlebackgroundyellow"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_arrow_back_black_24dp" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

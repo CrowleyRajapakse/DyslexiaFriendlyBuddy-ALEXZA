@@ -55,21 +55,21 @@ import java.util.List;
 import java.util.Locale;
 
 public class DictionaryActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
-    MediaStore.Audio audioFile;
 
-    String urlx;
-    String def;
-    String morph;
-    String senttext;
+
+    String dictURL;
+    String definition;
+    String morphologicalStructure;
+    String sentText;
     String data;
-    EditText editText;
+    EditText enteredWord;
     ImageView exampleImage;
-
-
     TextView exampleText;
     TextView phoneticText;
     TextView morphText;
     TextView defText;
+
+
     Button ivHardWord;
 
     ImageView listenDef, listenExample, listenWord;
@@ -91,32 +91,34 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
         setTitle(R.string.your_title);
         setContentView(R.layout.activity_dictionary);
 
-        editText = findViewById(R.id.editText);
+        enteredWord = findViewById(R.id.enteredWord);
         exampleText = findViewById(R.id.exampleText);
         phoneticText = findViewById(R.id.phoneticText);
         morphText = findViewById(R.id.morphText);
         defText = findViewById(R.id.defText);
         exampleImage = findViewById(R.id.exampleImage);
+
+
         ivHardWord = findViewById(R.id.ivHardWord);
-        listenDef = findViewById(R.id.defsound);
-        listenExample = findViewById(R.id.Examplesound);
-        listenWord = findViewById(R.id.pronouncesound);
+        listenDef = findViewById(R.id.defSound);
+        listenExample = findViewById(R.id.exampleSound);
+        listenWord = findViewById(R.id.pronounceSound);
 
         Intent intent = new Intent();
         intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(intent, 1);
 
         if (getIntent().getStringExtra(Intent.EXTRA_PROCESS_TEXT) != null) {
-            senttext = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
-            Log.d("DICTLOG", "Text : " + senttext);
-            editText.setText(senttext);
+            sentText = getIntent().getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT).toString();
+            Log.d("DICTLOG", "Text : " + sentText);
+            enteredWord.setText(sentText);
 
         }
 
         listenWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String dataString = editText.getText().toString();
+                String dataString = enteredWord.getText().toString();
                 tts.speak(dataString, TextToSpeech.QUEUE_FLUSH, null, null);
             }
         });
@@ -154,7 +156,8 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
 
                 client = new DefaultHttpClient(httpParams);
                 String[] datas = new String[1];
-                datas[0] = editText.getText().toString().toLowerCase();;
+                datas[0] = enteredWord.getText().toString().toLowerCase();
+                ;
                 sendWordRequest(datas);
 
                 String text = "Thanks For Contributing ALEXZA !";
@@ -221,21 +224,25 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
         defText.setText("");
         phoneticText.setText("");
         exampleText.setText("");
+
         myDictionaryRequest = new MyDictionaryRequest(this, defText, exampleText, phoneticText);
+        dictURL = dictionaryEntries();
+        myDictionaryRequest.execute(dictURL);
+
         morphStructure = new MorphologicalStructure();
-        urlx = dictionaryEntries();
-        data = editText.getText().toString().toLowerCase();
-        morph = morphStructure.Morphlogical(data);
-        morphText.setText(morph);
-        myDictionaryRequest.execute(urlx);
-        defText.setText(def);
+        data = enteredWord.getText().toString().toLowerCase();
+        morphologicalStructure = morphStructure.Morphlogical(data);
+
+        morphText.setText(morphologicalStructure);
+
         addImage();
 
     }
 
     private String dictionaryEntries() {
+
         final String language = "en";
-        final String word = editText.getText().toString();
+        final String word = enteredWord.getText().toString();
         final String word_id = word.toLowerCase();
         return "https://od-api.oxforddictionaries.com:443/api/v1/entries/" + language + "/" + word_id;
     }
@@ -243,7 +250,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
 
     private void addImage() {
 
-        final String word = editText.getText().toString();
+        final String word = enteredWord.getText().toString().toLowerCase().trim();
         int id = getResources().getIdentifier(word,
                 "raw", getPackageName());
 
@@ -310,7 +317,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
 
         JSONObject object = new JSONObject();
         JSONArray array = new JSONArray();
-        for(String dat : data){
+        for (String dat : data) {
             array.put(dat);
         }
         try {
@@ -319,7 +326,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
             e.printStackTrace();
         }
 
-        Log.d("Mytag","JSON : " + object);
+        Log.d("Mytag", "JSON : " + object);
 
         String url = "http://172.28.1.224:5000/train";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, object,
@@ -337,7 +344,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
             }
         });
 
-        request.setRetryPolicy(new DefaultRetryPolicy( 50000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        request.setRetryPolicy(new DefaultRetryPolicy(50000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         requestQueue.add(request);
     }
