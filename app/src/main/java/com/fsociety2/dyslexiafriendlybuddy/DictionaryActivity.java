@@ -1,16 +1,13 @@
 package com.fsociety2.dyslexiafriendlybuddy;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,33 +22,20 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.apache.http.HttpConnection;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.io.DataOutputStream;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.ResponseCache;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.InputStreamReader;
 import java.util.Locale;
 
 public class DictionaryActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
@@ -140,27 +124,49 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
         });
 
         requestQueue = Volley.newRequestQueue(this);
+
         ivHardWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                HttpParams httpParams = new BasicHttpParams();
-
-                //timeouts just in case the users internet connection is slow
-                int timeoutSocket = 20000;
-                int timeoutConnection = 20000;
-
-                //set the timeouts
-                HttpConnectionParams.setConnectionTimeout(httpParams, timeoutSocket);
-                HttpConnectionParams.setSoTimeout(httpParams, timeoutConnection);
-
-                client = new DefaultHttpClient(httpParams);
                 String[] datas = new String[1];
                 datas[0] = enteredWord.getText().toString().toLowerCase();
-                ;
-                sendWordRequest(datas);
 
-                String text = "Thanks For Contributing ALEXZA !";
+                String fileName = "hard_words";
+                FileOutputStream outputStream;
+
+                try{
+                    outputStream = openFileOutput(fileName, Context.MODE_APPEND);
+                    for(String s: datas){
+                        s = s+" ";
+                        outputStream.write(s.getBytes());
+                    }
+                    outputStream.close();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                System.out.println(getApplicationContext().getFilesDir());
+                String[] words = null;
+                try{
+                    FileInputStream fin = openFileInput(fileName);
+
+                    DataInputStream in = new DataInputStream(fin);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                    String strLine;
+
+                    while ((strLine = br.readLine()) != null){
+                        words = strLine.split("\\s+");
+                    }
+
+                    in.close();
+                    fin.close();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                sendWordRequest(words);
+                String text = "Hard Word Saved";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(DictionaryActivity.this, text, duration);
                 toast.show();
@@ -168,7 +174,6 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
         });
 
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -328,7 +333,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
 
         Log.d("Mytag", "JSON : " + object);
 
-        String url = "http://172.28.1.224:5000/train";
+        String url = "http://192.168.8.101:5000/train";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, object,
                 new Response.Listener<JSONObject>() {
                     @Override

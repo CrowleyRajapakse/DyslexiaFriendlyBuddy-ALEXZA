@@ -98,6 +98,8 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
 
         textFromCam = getIntent().getExtras().getString("data");
+        //textFromCam = "Dyslexia is a common learning difficulty that can cause problems with reading, writing and spelling. It's a specific learning difficulty, which means it causes problems with certain abilities used for learning, such as reading and writing. Unlike a learning disability, intelligence isn't affected.";
+
         dataView.setTextColor(Color.parseColor("#FF0000"));
         dataView.setBackgroundColor(Color.parseColor("#FFFF00"));
         dataView.setText(textFromCam);
@@ -202,26 +204,24 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
                         @Override
                         public void run() {
                             progress.cancel();
+
+                            ArrayList<String> hardWords = new ArrayList<String>();
+                            for (String word : words) {
+                                if (word.length() > 8) {
+                                    hardWords.add(word);
+                                }
+                            }
+
+                            for (String hw : hardWords) {
+                                int primaryColor = Color.RED;
+                                dataView.setText(highlight(primaryColor, spnString, hw));
+                                spnString = new SpannableString(dataView.getText());
+                            }
                         }
                     };
 
                     Handler pdCanceller = new Handler();
                     pdCanceller.postDelayed(progressRunnable, 3000);
-                    //    if(Arrays.asList(words).contains("Text")){
-                    ArrayList<String> hardWords = new ArrayList<String>();
-                    for (String word : words) {
-                        if (word.length() >= 6) {
-                            hardWords.add(word);
-                        }
-                    }
-
-                    for (String hw : hardWords) {
-                        int primaryColor = Color.RED;
-                        dataView.setText(highlight(primaryColor, spnString, hw));
-                        spnString = new SpannableString(dataView.getText());
-                    }
-
-                    //     }
                 }
             }
         });
