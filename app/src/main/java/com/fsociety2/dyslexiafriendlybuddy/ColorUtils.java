@@ -4,9 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
 
-/**
- * @author Kristiyan Petrov
- */
+
 
 public class ColorUtils {
 
@@ -21,8 +19,6 @@ public class ColorUtils {
         final int green = Color.green(color);
         final int blue = Color.blue(color);
 
-        // https://en.wikipedia.org/wiki/YIQ
-        // https://24ways.org/2010/calculating-color-contrast/
         final int yiq = ((red * 299) + (green * 587) + (blue * 114)) / 1000;
         return yiq < 192;
     }

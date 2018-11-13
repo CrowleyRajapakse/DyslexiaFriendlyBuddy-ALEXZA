@@ -14,13 +14,13 @@ public class MorphologicalStructure {
         List<String> middleArray = new ArrayList<>();
         List<Integer> indexes = new ArrayList<>();
         String newOutput = "";
-        int incrementCount = 0;
+        //int incrementCount = 0;
 
         for (int i = 0; i < splitArray.length; i++) {
             if ((splitArray[i] == 'a') | (splitArray[i] == 'e') | (splitArray[i] == 'i') | (splitArray[i] == 'o') | (splitArray[i] == 'u')) {
 
                 indexes.add(i);
-                incrementCount = incrementCount + 1;
+              //  incrementCount = incrementCount + 1;
                 System.out.println("2: " + i);
                 System.out.println(splitArray[i]);
 
@@ -28,7 +28,7 @@ public class MorphologicalStructure {
             }
         }
         if (indexes.size() != 0) {
-            int[] insideArray = new int[indexes.size()];
+            int[] insideArray = new int[indexes.size()];  // inside array to make indexes list to an array
             int start = 0;
             for (int i = 0; i < indexes.size(); i++) {
 
@@ -38,7 +38,7 @@ public class MorphologicalStructure {
                 start = insideArray[i] + 1;
             }
 
-            String[] x = middleArray.toArray(new String[middleArray.size()]);
+            String[] x = middleArray.toArray(new String[middleArray.size()]);  //x to make middle list an array
             String output = "";
             for (String str : x)
                 output = output + str;

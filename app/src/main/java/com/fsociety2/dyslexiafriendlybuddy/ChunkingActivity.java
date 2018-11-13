@@ -307,12 +307,13 @@ public class ChunkingActivity extends AppCompatActivity {
 
         @Override
         public void onStartTrackingTouch(SeekBar seekBar) {
-            textPreview.setTextSize(TypedValue.COMPLEX_UNIT_SP, seekBar.getProgress());
+
 
         }
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
+            textPreview.setTextSize(TypedValue.COMPLEX_UNIT_SP, seekBar.getProgress());
 
         }
     };

@@ -265,6 +265,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
 
         }
 
+
         InputStream imageStream = this.getResources().openRawResource(id);
         Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
         exampleImage.setImageBitmap(bitmap);
