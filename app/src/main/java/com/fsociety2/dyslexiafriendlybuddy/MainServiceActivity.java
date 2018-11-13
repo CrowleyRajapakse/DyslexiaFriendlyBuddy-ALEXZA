@@ -30,10 +30,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -65,6 +83,8 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
     private Activity activity;
     private Button btnMl;
     private SpannableString spnString;
+    Volley volley;
+    RequestQueue requestQueue;
 
 
     SharedPreferences sharedPreferences;
@@ -110,7 +130,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         Log.d("LOGCATCHUNK", "Text : " + dataView.getText());
         dataView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
-        String[] dataArr = textFromCam.split(" ");
+        final String[] dataArr = textFromCam.split(" ");
 
         ImageView button2 = findViewById(R.id.toChunkInterface);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +204,8 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         intent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(intent, 1);
 
+        requestQueue = Volley.newRequestQueue(this);
+
         btnMl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -205,16 +227,38 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
                         public void run() {
                             progress.cancel();
 
-                            ArrayList<String> hardWords = new ArrayList<String>();
-                            for (String word : words) {
-                                if (word.length() > 8) {
-                                    hardWords.add(word);
+                            String fileName = "hard_words";
+                            String[] savedWords = null;
+                            ArrayList<String> hw = new ArrayList<>();
+                            try{
+                                FileInputStream fin = openFileInput(fileName);
+
+                                DataInputStream in = new DataInputStream(fin);
+                                BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                                String strLine;
+
+                                while ((strLine = br.readLine()) != null){
+                                    savedWords = strLine.split("\\s+");
+                                }
+
+                                in.close();
+                                fin.close();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
+                            ArrayList<String> feed = new ArrayList<>();
+                            for (String word : dataArr) {
+                                if (word.length() > 4) {
+                                    feed.add(word);
                                 }
                             }
 
-                            for (String hw : hardWords) {
+                            hw = sendWordRequest(savedWords, feed);
+                            System.out.println("############## "+hw.size());
+                            for (String word : hw) {
                                 int primaryColor = Color.RED;
-                                dataView.setText(highlight(primaryColor, spnString, hw));
+                                dataView.setText(highlight(primaryColor, spnString, word));
                                 spnString = new SpannableString(dataView.getText());
                             }
                         }
@@ -461,6 +505,73 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
         return isConnected;
+    }
+
+    volatile static ArrayList<String> hardWords = new ArrayList<>();
+    /**
+     * hard word identification process from the captured feed
+     * @param savedWords
+     * @param feed
+     */
+    public ArrayList<String> sendWordRequest(String[] savedWords, List<String> feed) {
+
+        JSONObject object = new JSONObject();
+        JSONArray array = new JSONArray();
+        JSONArray array2 = new JSONArray();
+        //final static ArrayList<String> hardWords = new ArrayList<>();
+
+        for (String dat : savedWords) {
+            array.put(dat);
+        }
+
+        for(String word : feed){
+            array2.put(word);
+        }
+
+        try {
+            object.put("data", array);
+            object.put("feed", array2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("Mytag", "JSON : " + object);
+
+        String url = "http://192.168.8.100:5000/predict";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, object,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Display the first 500 characters of the response string.
+                        JSONArray array3 = new JSONArray();
+                        try {
+                            array3 = response.getJSONArray("hard_words");
+
+                            if(array3 != null){
+                                for(int i=0; i<array3.length(); i++){
+                                    hardWords.add(array3.getString(i));
+                                }
+                                System.out.println("inner: "+hardWords.size());
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        Log.d("Mytag", "Result : " + response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("mytag", "error : " + error.getMessage());
+                error.printStackTrace();
+            }
+        });
+
+        request.setRetryPolicy(new DefaultRetryPolicy(50000, 5, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue.add(request);
+        System.out.println("outer: "+hardWords.size());
+        return hardWords;
     }
 
     /**

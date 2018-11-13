@@ -333,7 +333,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
 
         Log.d("Mytag", "JSON : " + object);
 
-        String url = "http://192.168.8.101:5000/train";
+        String url = "http://192.168.8.100:5000/train";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, object,
                 new Response.Listener<JSONObject>() {
                     @Override
