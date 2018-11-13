@@ -110,7 +110,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
         Log.d("LOGCATCHUNK", "Text : " + dataView.getText());
         dataView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize);
 
-        String[] dataArr = textFromCam.split(" ");
+        //   String[] dataArr = textFromCam.split(" ");
 
         ImageView button2 = findViewById(R.id.toChunkInterface);
         button2.setOnClickListener(new View.OnClickListener() {
@@ -425,7 +425,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
             pages = new String[pageCount];
             Log.d(TAG, "CHUNKING pages length : " + pages.length);
-
+//iterate no of pages
             for (int i = 0; i < pageCount; i++) {
                 String page = "";
                 Log.d(TAG, "CHUNKING init page : " + page);

@@ -18,7 +18,7 @@ class CustomSpinnerAdapter  extends ArrayAdapter {
         this.context=context;
         this.itemList=itemList;
     }
-
+    //to get the name
     public TextView getView(int position, View convertView, ViewGroup parent) {
 
         TextView v = (TextView) super
@@ -29,7 +29,7 @@ class CustomSpinnerAdapter  extends ArrayAdapter {
         v.setText(itemList.get(position));
         return v;
     }
-
+    //to get the value
     public TextView getDropDownView(int position, View convertView,
                                     ViewGroup parent) {
 
