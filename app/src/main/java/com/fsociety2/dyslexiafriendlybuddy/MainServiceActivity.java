@@ -206,6 +206,9 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
         requestQueue = Volley.newRequestQueue(this);
 
+        /**
+         * hard word selection function
+         */
         btnMl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -249,13 +252,13 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
                             ArrayList<String> feed = new ArrayList<>();
                             for (String word : dataArr) {
-                                if (word.length() > 4) {
+                                if (word.length() > 5) {
                                     feed.add(word);
                                 }
                             }
 
                             hw = sendWordRequest(savedWords, feed);
-                            System.out.println("############## "+hw.size());
+
                             for (String word : hw) {
                                 int primaryColor = Color.RED;
                                 dataView.setText(highlight(primaryColor, spnString, word));
@@ -537,7 +540,7 @@ public class MainServiceActivity extends AppCompatActivity implements TextToSpee
 
         Log.d("Mytag", "JSON : " + object);
 
-        String url = "http://192.168.8.100:5000/predict";
+        String url = "http://192.168.8.103:5000/predict";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, object,
                 new Response.Listener<JSONObject>() {
                     @Override

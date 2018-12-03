@@ -125,6 +125,9 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
 
         requestQueue = Volley.newRequestQueue(this);
 
+        /**
+         * hard word training function
+         */
         ivHardWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -272,53 +275,11 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
 
     }
 
-//    protected void onPostExecute(String Result) {
-//
-//        if (Result != null) {
-//            Log.i("myAppTag", "(onpostExecute method) Result = Posted");
-//        } else {
-//            Log.i("myAppTag", "(onPostExecute method) Result = Failed to post!");
-//        }
-//    }
 
-//    public class HardWordRequest extends AsyncTask<String, Integer, String> {
-//
-//        final static String url = "http://192.168.1.3:5000/train";
-//
-//
-//        @Override
-//        protected String doInBackground(String... arg0) {
-//
-//            try {
-//                HttpPost post = new HttpPost(url.toString());
-//                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-//
-//                int i = 0;
-//                String[] data = null;
-//                data[0] = "test";
-//                //holds the values that will sent to the rest service
-//
-//                //nameValuePairs.add(new BasicNameValuePair("data[1]","contemperory"));
-//
-//                //set the headers to josn type
-//                //post.setHeader("Accept", "application/json");
-//                post.setHeader("Content-type", "application/json");
-//
-//                post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-//
-//                HttpResponse response = client.execute(post);
-//
-//                int status = response.getStatusLine().getStatusCode();
-//                Log.i("myAppTag", "error in doInBg..." + response.getStatusLine().getReasonPhrase());
-//
-//            } catch (Exception e) {
-//                Log.i("myAppTag", "error in doInBg..." + e.toString());
-//                return null;
-//            }
-//            return null;
-//        }
-//    }
-
+    /**
+     * hard word training function
+     * @param data
+     */
     public void sendWordRequest(String[] data) {
 
         JSONObject object = new JSONObject();
@@ -334,7 +295,7 @@ public class DictionaryActivity extends AppCompatActivity implements TextToSpeec
 
         Log.d("Mytag", "JSON : " + object);
 
-        String url = "http://192.168.8.100:5000/train";
+        String url = "http://192.168.8.103:5000/train";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, object,
                 new Response.Listener<JSONObject>() {
                     @Override

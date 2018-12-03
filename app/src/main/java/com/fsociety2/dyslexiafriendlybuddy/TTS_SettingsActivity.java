@@ -44,10 +44,8 @@ public class TTS_SettingsActivity extends AppCompatActivity {
 
         seekBarPitch = (SeekBar) findViewById(R.id.seekBar_pitch);
         seekBarSpeed = (SeekBar) findViewById(R.id.seekBar_speed);
-        //seekBarVolume = (SeekBar) findViewById(R.id.seekBar_volume);
         textViewPitch = (TextView) findViewById(R.id.pitch_textView);
         textViewSpeed = (TextView) findViewById(R.id.speed_textView);
-        // textViewVolume = (TextView) findViewById(R.id.volume_textView);
         ttsBackButton = findViewById(R.id.tts_backButton);
         ttsSaveButton = findViewById(R.id.tts_settingSave);
 
@@ -88,13 +86,6 @@ public class TTS_SettingsActivity extends AppCompatActivity {
 
             }
         });
-//        seekBarVolume.setOnSeekBarChangeListener(volumeSeekBarListener);
-//        int previousVolume = sharedPreferences.getInt(TTS_SettingsActivity.EXTRA_VOLUME_RATE, 10);
-//        seekBarVolume.setProgress(previousVolume);
-
-
-        //setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        // initControls();
 
     }
 
@@ -133,33 +124,6 @@ public class TTS_SettingsActivity extends AppCompatActivity {
         }
     };
 
-//    private SeekBar.OnSeekBarChangeListener volumeSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
-//        @Override
-//        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//            textViewVolume.setText(" " + progress + "%");
-//            initControls();
-//        }
-//
-//        @Override
-//        public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//        }
-//
-//        @Override
-//        public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//        }
-//    };
-
-//
-//    @Override
-//    protected void onPause() {
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//        editor.putFloat(EXTRA_PITCH_RATE, pitch);
-//        editor.putFloat(EXTRA_SPEED_RATE, speed);
-//        editor.apply();
-//        super.onPause();
-//    }
 
     private void updatePitch(float value) {
 
@@ -180,16 +144,4 @@ public class TTS_SettingsActivity extends AppCompatActivity {
         editor.apply();
     }
 
-//    private void initControls() {
-//        try {
-//            audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-//            maxValue = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-//            curValue = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-//            seekBarVolume.setMax(maxValue);
-//            seekBarVolume.setProgress(curValue);
-//
-//        } catch (Exception e) {
-//
-//        }
-//    }
 }
